@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "pPjPlamnpo0XsbGJrH0BboNJC194NmqVg3JET49fh3uNwaN63hdsZRdnWBsBtuPpagTHgM1v+HLjuFTF4jL4Kw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\marma\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\marma\\.nuget\\packages\\materialdesigncolors\\1.2.7\\materialdesigncolors.1.2.7.nupkg.sha512",
+    "C:\\Users\\marma\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
