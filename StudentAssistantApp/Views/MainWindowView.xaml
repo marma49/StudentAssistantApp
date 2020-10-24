@@ -25,31 +25,31 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         <Grid HorizontalAlignment="Left" Width="170" Background="#FF181855" Margin="0,79,0,0">
             <StackPanel Margin="0,0,0,0"> 
                 <ListView x:Name="ListViewMenu" Foreground="#FF89C0F7" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontSize="16">
-                    <ListViewItem x:Name="ItemHome" Height="80">
+                    <ListViewItem x:Name="ItemNotes" Height="80">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Note" Height="30" Width="30" Margin="10"/>
                             <TextBlock Text="Notatki" VerticalAlignment="Center" Margin="5"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemHome2" Height="80">
+                    <ListViewItem x:Name="ItemGrades" Height="80">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Grade" Height="30" Width="30" Margin="10"/>
                             <TextBlock Text="Oceny" VerticalAlignment="Center" Margin="5"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemHome3" Height="80">
+                    <ListViewItem x:Name="ItemTasks" Height="80">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Subtasks" Height="30" Width="30" Margin="10"/>
                             <TextBlock Text="Zadania" VerticalAlignment="Center" Margin="5"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemHome4" Height="80">
+                    <ListViewItem x:Name="ItemСalendar" Height="80">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Calendar" Height="30" Width="30" Margin="10"/>
                             <TextBlock Text="Kalendarz" VerticalAlignment="Center" Margin="5"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemHome5" Height="80">
+                    <ListViewItem x:Name="ItemOptions" Height="80">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" Margin="10"/>
                             <TextBlock Text="Ustawienia" VerticalAlignment="Center" Margin="5"/>
