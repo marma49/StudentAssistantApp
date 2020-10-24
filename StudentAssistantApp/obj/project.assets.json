@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Caliburn.Micro.Core/3.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Caliburn.Micro.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Caliburn.Micro.dll": {}
+        }
+      },
       "MaterialDesignColors/1.2.7": {
         "type": "package",
         "compile": {
@@ -29,6 +38,26 @@
     }
   },
   "libraries": {
+    "Caliburn.Micro.Core/3.2.0": {
+      "sha512": "jmpC4OSvejrrIlcSmlzFjtyOmHQBrKgqJ9hy/LeWGoytct0e2b+TVgzWHTtvkzBF6TWWYlWCNErF10O6hNoL0g==",
+      "type": "package",
+      "path": "caliburn.micro.core/3.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "caliburn.micro.core.3.2.0.nupkg.sha512",
+        "caliburn.micro.core.nuspec",
+        "lib/net40/Caliburn.Micro.XML",
+        "lib/net40/Caliburn.Micro.dll",
+        "lib/net45/Caliburn.Micro.dll",
+        "lib/net45/Caliburn.Micro.xml",
+        "lib/portable-net45+win8+wp8+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10+uap10.0/Caliburn.Micro.XML",
+        "lib/portable-net45+win8+wp8+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10+uap10.0/Caliburn.Micro.dll",
+        "lib/portable-net45+win8+wp8+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10+uap10.0/Caliburn.Micro.dll.mdb",
+        "lib/sl5/Caliburn.Micro.XML",
+        "lib/sl5/Caliburn.Micro.dll"
+      ]
+    },
     "MaterialDesignColors/1.2.7": {
       "sha512": "e+shDlaSAJcuTArqtfWjVUgAOlwQlgWq8akkzCGe1MvfV1ozmOqqXyWxg5w0vC/3/KZ84wnPUJeI1wzEpI0uJQ==",
       "type": "package",
@@ -87,27 +116,28 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Caliburn.Micro.Core >= 3.2.0",
       "MaterialDesignThemes >= 3.2.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marma\\.nuget\\packages\\": {},
+    "C:\\Users\\serge\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marma\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+      "projectUniqueName": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
       "projectName": "StudentAssistantApp",
-      "projectPath": "C:\\Users\\marma\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
-      "packagesPath": "C:\\Users\\marma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marma\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\obj\\",
+      "projectPath": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+      "packagesPath": "C:\\Users\\serge\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\marma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\serge\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -131,6 +161,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Caliburn.Micro.Core": {
+            "target": "Package",
+            "version": "[3.2.0, )"
+          },
           "MaterialDesignThemes": {
             "target": "Package",
             "version": "[3.2.0, )"
@@ -157,5 +191,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Caliburn.Micro.Core 3.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Caliburn.Micro.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

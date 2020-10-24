@@ -62,7 +62,7 @@ namespace StudentAssistantApp {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/StudentAssistantApp;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StudentAssistantApp;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
