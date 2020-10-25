@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\App.xaml
-1-809265419
+6-456794261
 
-5-734524063
+15638896582
 198-757461997
-Views\MainWindowView.xaml;
+Views\CalendarWindowView.xaml;Views\GradesWindowView.xaml;Views\MainWindowView.xaml;Views\NotesWindowView.xaml;Views\OptionsWindowView.xaml;Views\TasksWindowView.xaml;
 
 False
 

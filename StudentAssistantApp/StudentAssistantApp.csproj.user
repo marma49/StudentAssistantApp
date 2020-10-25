@@ -7,7 +7,39 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CalendarWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GradesWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NotesWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OptionsWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TasksWindowView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\CalendarWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GradesWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NotesWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OptionsWindowView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TasksWindowView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
