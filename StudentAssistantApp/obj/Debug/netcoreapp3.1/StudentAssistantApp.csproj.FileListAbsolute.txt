@@ -49,3 +49,13 @@ C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\net
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\MainWindowView.g.cs
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\MainWindowView.baml
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\StudentAssistantApp.csproj.CoreCompileInputs.cache
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\NotesWindowView.g.cs
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\NotesWindowView.baml
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\GradesWindowView.g.cs
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\OptionsWindowView.g.cs
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\TasksWindowView.g.cs
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\GradesWindowView.baml
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\OptionsWindowView.baml
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\TasksWindowView.baml
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\CalendarWindowView.g.cs
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\CalendarWindowView.baml
