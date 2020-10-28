@@ -33,6 +33,10 @@ namespace StudentAssistantApp.ViewModels
         {
             ActivateItem(new OptionsWindowViewModel());
         }
+        public void LoadLogin()
+        {
+            ActivateItem(new LoginWindowViewModel());
+        }
 
     }
 }

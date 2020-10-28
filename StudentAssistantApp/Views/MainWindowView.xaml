@@ -1,4 +1,4 @@
-﻿<Window x:Class="StudentAssistantApp.Views.MainWindowView"
+<Window x:Class="StudentAssistantApp.Views.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -63,6 +63,12 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" Margin="10"/>
                                 <TextBlock Text="Ustawienia" VerticalAlignment="Center" Margin="5"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="ItemLogin" Height="80" cal:Message.Attach="[Event GotFocus] = [Action LoadLogin]">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Login" Height="30" Width="30" Margin="10"/>
+                                <TextBlock Text="Logowanie" VerticalAlignment="Center" Margin="5"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>
