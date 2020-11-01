@@ -3,32 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StudentAssistantApp.Views"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
+        TextElement.FontSize="14"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}" ResizeMode="NoResize"
-        Title="LoginFormView" Height="600" Width="400" 
-        WindowStartupLocation="CenterScreen"
+        Title="LoginFormView" Height="550" Width="350" Background="{x:Null}"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
         >
-    <Grid>
-        <StackPanel Margin="40">
-            <Label Content="Student Assistant" FontSize="20" HorizontalAlignment="Center" Margin="0, 0"/>
-            <StackPanel Margin="20, 40">
-                <TextBox Margin="10, 20"/>
-                <TextBox Margin="10, 20"/>
-            </StackPanel>
-            <StackPanel Margin="0 40 0 0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="Close" Content="Close" Margin="15, 0"/>
-                    <Button x:Name="LogIn" Content="Log In" Margin="15, 0"/>
+    <Border Background="{DynamicResource MaterialDesignPaper}" CornerRadius="15">
+        <Grid>
+            <StackPanel Margin="40">
+                <Label Content="Student Assistant" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
+                <StackPanel Margin="20, 30">
+                    <TextBox materialDesign:HintAssist.Hint="Login" 
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Margin="10, 20"/>
+                    <PasswordBox materialDesign:HintAssist.Hint="Password"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 Margin="10, 20"/>
+                </StackPanel>
+                <StackPanel Margin="0 40 0 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Close" Content="Close" Margin="15, 0"/>
+                        <Button x:Name="LogIn" Content="Log In" Margin="15, 0"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>
