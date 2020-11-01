@@ -22,17 +22,5 @@ namespace StudentAssistantApp.Views
         {
             InitializeComponent();
         }
-
-        private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(loginTextBox.Text == "test" && passwordTextBox.Text == "test")
-            {
-                MessageBox.Show("Zalogowano");
-            }
-            else
-            {
-                MessageBox.Show("Błędne dane");
-            }
-        }
     }
 }

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="loginButton" Content="Zaloguj się" Width="140" Margin="330,268,330,150" Click="loginButton_Click"/>
+        <Button x:Name="loginButton" Content="Zaloguj się" Width="140" Margin="330,268,330,150"/>
         <TextBox x:Name="loginTextBox" Text="" TextWrapping="Wrap" Width="120" Height="22" Margin="400,166,280,262"/>
         <Label x:Name="nickLabel" Content="Użytkownik:" Height="22" Width="80" Margin="298,166,422,262"/>
         <Label x:Name="passwordLabel" Content="Hasło:" Height="22" Width="80" Margin="298,214,422,214"/>
