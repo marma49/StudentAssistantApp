@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using Caliburn.Micro;
+using StudentAssistantApp.Views;
 
 namespace StudentAssistantApp.ViewModels
 {
     public class MainWindowViewModel : Conductor<object>
     {
+        IWindowManager manager = new WindowManager();
 
         public void LoadNotes()
         {
@@ -33,9 +35,10 @@ namespace StudentAssistantApp.ViewModels
         {
             ActivateItem(new OptionsWindowViewModel());
         }
-        public void LoadLogin()
+        public void LogOut()
         {
-            ActivateItem(new LoginWindowViewModel());
+            manager.ShowWindow(new LoginFormViewModel());
+            TryClose();
         }
 
     }

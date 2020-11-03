@@ -65,10 +65,10 @@
                                 <TextBlock Text="Ustawienia" VerticalAlignment="Center" Margin="5"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="ItemLogin" Height="80" cal:Message.Attach="[Event GotFocus] = [Action LoadLogin]">
+                        <ListViewItem x:Name="ItemLogOut" Height="80" cal:Message.Attach="[Event MouseUp] = [Action LogOut]">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Login" Height="30" Width="30" Margin="10"/>
-                                <TextBlock Text="Logowanie" VerticalAlignment="Center" Margin="5"/>
+                                <TextBlock Text="Wyloguj się" VerticalAlignment="Center" Margin="5"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>
