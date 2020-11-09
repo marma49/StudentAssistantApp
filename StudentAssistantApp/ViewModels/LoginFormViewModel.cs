@@ -12,13 +12,13 @@ namespace StudentAssistantApp.ViewModels
 
         public void Close()
         {
-            TryClose();
+            TryCloseAsync();
         }
 
         public void LogIn()
         {
-            manager.ShowWindow(new MainWindowViewModel());
-            TryClose();
+            manager.ShowWindowAsync(new MainWindowViewModel());
+            TryCloseAsync();
         }
     }
 }
