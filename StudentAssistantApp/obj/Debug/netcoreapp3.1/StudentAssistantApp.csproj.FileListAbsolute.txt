@@ -42,10 +42,7 @@ C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\net
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\StudentAssistantApp.pdb
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\StudentAssistantApp.genruntimeconfig.cache
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\Caliburn.Micro.Platform.Core.dll
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\Caliburn.Micro.Platform.dll
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\Caliburn.Micro.dll
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\MainWindowView.g.cs
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\MainWindowView.baml
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\StudentAssistantApp.csproj.CoreCompileInputs.cache
@@ -61,3 +58,5 @@ C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\net
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\CalendarWindowView.baml
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\LoginFormView.g.cs
 C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\Views\LoginFormView.baml
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\Caliburn.Micro.Core.dll
+C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\bin\Debug\netcoreapp3.1\Microsoft.Xaml.Behaviors.dll
