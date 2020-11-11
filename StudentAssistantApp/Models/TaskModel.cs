@@ -8,5 +8,7 @@ namespace StudentAssistantApp.Models
     {
         public string TaskName { get; set; }
         public string TaskExplanation { get; set; }
+        public int TaskID { get; set; } = 0;
+
     }
 }
