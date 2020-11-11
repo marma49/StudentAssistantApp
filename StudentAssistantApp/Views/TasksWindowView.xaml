@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:StudentAssistantApp.Views"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,9 +13,9 @@
             <!--Dialog window-->
             <materialDesign:DialogHost.DialogContent>
                 <!--Start Dialog window design-->
-                <Grid Height="350"  Width="400">
+                <Grid Height="350"  Width="350">
                     <Label Content="Nowe zadanie" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
-                    <StackPanel Margin="50 70">
+                    <StackPanel Margin="50 80">
                         <TextBox x:Name="TaskName" Padding="0 2" Text="{Binding TaskName}"
                               materialDesign:HintAssist.Hint="Task name"
                               materialDesign:HintAssist.HelperText="Max 20 symbols">
@@ -26,16 +26,17 @@
                                  Margin="0 50 0 0"
                                  materialDesign:HintAssist.Hint="This is a text area" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 50" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Button Content="Close" Margin="15 0"
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button Content="Accept" Margin="15 0" cal:Message.Attach="[Event Click] = [Action AddNewTask]"/>
+                        <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                                cal:Message.Attach="[Event Click] = [Action AddNewTask]"/>
                     </StackPanel>
                 </Grid>
                 <!--END Dialog window design-->
             </materialDesign:DialogHost.DialogContent>
             <!--END Dialog window design-->
-            
+
             <!--Main window design-->
             <Grid Background="White">
                 <Grid.RowDefinitions>
@@ -44,39 +45,74 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer>
-                    <ItemsControl x:Name="Tasks" Grid.Row="0">
+                    <!--Items-->
+                    <ItemsControl x:Name="GridLayout" Grid.Row="0" ItemsSource="{Binding Tasks}">
+                        <!--Items Panel-->
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <!--END Items Panel-->
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <GroupBox Header="{Binding TaskName}"  
-                              Style="{DynamicResource MaterialDesignGroupBox}"
-                              Margin="16"               
-                              materialDesign:ColorZoneAssist.Mode="Accent"
-                              Width="250" Height="250">
+                                <GroupBox x:Name="gbTask" Header="{Binding TaskName}" Tag="{Binding TaskID}"
+                                          Style="{DynamicResource MaterialDesignGroupBox}"
+                                          Margin="16"               
+                                          materialDesign:ColorZoneAssist.Mode="Accent"
+                                          Width="250" Height="250">
                                     <ScrollViewer>
                                         <TextBlock TextWrapping="Wrap" Text="{Binding TaskExplanation}"/>
                                     </ScrollViewer>
+                                    <!--GroupBox Header Template-->
+                                    <GroupBox.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <!--GroupBox Header Text-->
+                                                <TextBlock Grid.Column="0" Text="{Binding Path=Header, ElementName=gbTask}"/>
+                                                <!--END GroupBox Header Text-->
+                                                <!--GroupBox Header PopupBox-->
+                                                <materialDesign:PopupBox
+                                                    PlacementMode="BottomAndAlignRightEdges" Grid.Column="1" Foreground="Black">
+                                                    <materialDesign:PopupBox.ToggleContent>
+                                                        <materialDesign:PackIcon Kind="DotsHorizontal" 
+                                                                                 Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
+                                                    </materialDesign:PopupBox.ToggleContent>
+                                                    <ListBox >
+                                                        <ListBoxItem Content="Edytować"/>
+                                                        <ListBoxItem Content="Usunąć" cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" Tag="{Binding Path=Tag, ElementName=gbTask}"
+                                                                     cal:Message.Attach="[Event Selected] = [Action DeleteTask($source)]"/>
+                                                        <ListBoxItem Content="Info"/>
+                                                    </ListBox>
+                                                </materialDesign:PopupBox>
+                                                <!--END GroupBox Header PopupBox-->
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GroupBox.HeaderTemplate>
+                                    <!--END GroupBox Header Template-->
                                 </GroupBox>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <!--END Items-->
                 </ScrollViewer>
-
+                
 
                 <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 50 20"
-                Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                Width="120"
-                ToolTip="Click to add new task!">
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Width="120"
+                        ToolTip="Click to add new task!">
                     Add new task
                 </Button>
 
             </Grid>
             <!--END Main window design-->
+
         </materialDesign:DialogHost>
     </Grid>
 </UserControl>
