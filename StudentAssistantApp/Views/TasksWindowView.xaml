@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
             <!--Dialog window-->
             <materialDesign:DialogHost.DialogContent>
                 <!--Start Dialog window design-->
@@ -28,7 +28,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                         <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                cal:Message.Attach="[Event Click] = [Action CloseDialog]"/>
                         <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
                                 cal:Message.Attach="[Event Click] = [Action AddNewTask]"/>
                     </StackPanel>
@@ -82,11 +82,11 @@
                                                         <materialDesign:PackIcon Kind="DotsHorizontal" 
                                                                                  Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
                                                     </materialDesign:PopupBox.ToggleContent>
-                                                    <ListBox >
-                                                        <ListBoxItem Content="Edytować"/>
-                                                        <ListBoxItem Content="Usunąć" cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" Tag="{Binding Path=Tag, ElementName=gbTask}"
-                                                                     cal:Message.Attach="[Event Selected] = [Action DeleteTask($source)]"/>
-                                                        <ListBoxItem Content="Info"/>
+                                                    <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}">
+                                                        <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=gbTask}" 
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditTask($source)]" />
+                                                        <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=gbTask}"
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action DeleteTask($source)]"/>
                                                     </ListBox>
                                                 </materialDesign:PopupBox>
                                                 <!--END GroupBox Header PopupBox-->
@@ -100,7 +100,7 @@
                     </ItemsControl>
                     <!--END Items-->
                 </ScrollViewer>
-                
+
 
                 <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 50 20"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
