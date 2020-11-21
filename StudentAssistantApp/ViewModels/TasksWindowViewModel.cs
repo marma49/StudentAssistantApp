@@ -82,22 +82,15 @@ namespace StudentAssistantApp.ViewModels
             IsDialogOpen = false;
             isEditing = false;
         }
-        public void DeleteTask(object sender)
+        public async Task DeleteTaskAsync(object sender)
         {
             var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //Get sender
             itemIndex = int.Parse(listBoxItem.Tag.ToString()); //Convert  listBoxItem.Tag to int (TaskID)
             TaskModel task = Tasks.Where(n => n.TaskID == itemIndex).First();
 
 
-            Task.Run(() =>
-            {
-                Thread.Sleep(300);//A short delay to make more smooth animation of removing
-                Dispatcher.CurrentDispatcher.Invoke(() =>
-                {
-                    Tasks.Remove(task); //Get and remove selected task
-                });
-            });
-
+            await Task.Delay(300);//A short delay to make more smooth animation of removing
+            Tasks.Remove(task); //Get and remove selected task
             if (Tasks.Count == 0)
             {
                 itemCount = 0;
@@ -116,7 +109,6 @@ namespace StudentAssistantApp.ViewModels
             TaskName = Tasks[itemIndex].TaskName;
             TaskExplanation = Tasks[itemIndex].TaskExplanation;
         }
-
      
     }
 }

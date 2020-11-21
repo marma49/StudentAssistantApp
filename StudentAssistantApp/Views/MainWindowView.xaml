@@ -28,11 +28,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0">
-            <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="170" Background="#FF5C5CAE">
+            <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="170" Background="#1c2335">
                 <TextBlock Text="StudentApp" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
             </Grid>
 
-            <Grid HorizontalAlignment="Left" Width="170" Background="#FF181855" Margin="0,79,0,0">
+            <Grid HorizontalAlignment="Left" Width="170" Background="#21293e" Margin="0,79,0,0">
                 <StackPanel Margin="0,0,0,0">
                     <ListView x:Name="ListViewMenu" Foreground="#FF89C0F7" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontSize="16">
                         <ListViewItem x:Name="ItemNotes" Height="80" cal:Message.Attach="[Event GotFocus] = [Action LoadNotes]">
