@@ -75,6 +75,15 @@ namespace StudentAssistantApp.ViewModels
             else
             {
                 tasks.Add(new TaskModel { TaskName = taskName, TaskExplanation = taskExplanation, TaskID = itemCount++});
+
+                //Dodawanie do bazy
+                var dbtask = new DBTask { TaskHeadline = taskName, TaskText = taskExplanation };
+                using (var context = new StudentAppContext())
+                {
+                    context.DBTasks.Add(dbtask);
+
+                    context.SaveChanges();
+                }
             }
 
             TaskExplanation = "";
