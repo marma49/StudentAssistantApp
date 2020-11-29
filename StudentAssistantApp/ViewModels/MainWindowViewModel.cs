@@ -13,11 +13,15 @@ namespace StudentAssistantApp.ViewModels
         IWindowManager manager = new WindowManager();
         CancellationTokenSource cancellationToken = null;
         CancellationToken token;
+        //System.Windows.WindowState windowState;
+
+        // public WindowState WindowState { get => windowState; set { windowState = value; NotifyOfPropertyChange("WindowState"); } }
 
         public MainWindowViewModel()
         {
             cancellationToken = new CancellationTokenSource();
             token = cancellationToken.Token;
+            // WindowState = WindowState.Normal;
         }
         public void LoadNotes()
         {
@@ -48,6 +52,17 @@ namespace StudentAssistantApp.ViewModels
             manager.ShowWindowAsync(new LoginFormViewModel());
             TryCloseAsync();
         }
+
+        //CUSTOM WindowChrome
+        //public void CloseWindow()
+        //{
+        //    this.TryCloseAsync();
+        //}
+
+        //public void MinimalizeWindow()
+        //{
+        //    WindowState = WindowState.Minimized;
+        //}
 
     }
 }

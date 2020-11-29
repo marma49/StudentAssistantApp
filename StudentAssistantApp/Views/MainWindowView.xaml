@@ -14,9 +14,16 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}" ResizeMode="CanResize"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowState="{Binding WindowState, Mode=TwoWay}"
         MinHeight="600" 
-        MinWidth="800" WindowStartupLocation="CenterScreen">
+        MinWidth="800" WindowStartupLocation="CenterScreen" >
+
+
+    <!--<WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30" ResizeBorderThickness="6"/>
+    </WindowChrome.WindowChrome>-->
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -24,10 +31,30 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <!--<RowDefinition Height="30"/>-->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0">
+      
+        <!--CUSTOM WINDOWSCHROME-->
+        <!--<Grid Grid.ColumnSpan="2" Background="#1c2335">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
+
+                <Button x:Name="MinimalizeWindow" Style="{StaticResource MaterialDesignFloatingActionButton}" Height="33" Width="35" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5 0">
+                    <materialDesign:PackIcon Kind="WindowMinimize" Width="25" Height="25"/>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" Height="33" Width="35" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5 0">
+                    <materialDesign:PackIcon Kind="WindowRestore" Width="25" Height="25"/>
+                </Button>
+
+                <Button x:Name="CloseWindow" Style="{StaticResource MaterialDesignFloatingActionButton}" Height="33" Width="35" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5 0">
+                    <materialDesign:PackIcon Kind="Close"  Width="25" Height="25"/>
+                </Button>
+            </StackPanel>
+        </Grid>-->
+
+        <Grid Grid.Column="0" Grid.Row="1">
             <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="170" Background="#1c2335">
                 <TextBlock Text="StudentApp" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
             </Grid>
@@ -75,6 +102,6 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="0"/>
+        <ContentControl x:Name="ActiveItem" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
