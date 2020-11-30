@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj": {}
+    "C:\\Users\\Kamil\\Source\\Repos\\StudentAssistantApp-test\\StudentAssistantApp\\StudentAssistantApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj": {
+    "C:\\Users\\Kamil\\Source\\Repos\\StudentAssistantApp-test\\StudentAssistantApp\\StudentAssistantApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+        "projectUniqueName": "C:\\Users\\Kamil\\Source\\Repos\\StudentAssistantApp-test\\StudentAssistantApp\\StudentAssistantApp.csproj",
         "projectName": "StudentAssistantApp",
-        "projectPath": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
-        "packagesPath": "C:\\Users\\serge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\serge\\Desktop\\UEK\\StudentAssistantApp\\StudentAssistantApp\\obj\\",
+        "projectPath": "C:\\Users\\Kamil\\Source\\Repos\\StudentAssistantApp-test\\StudentAssistantApp\\StudentAssistantApp.csproj",
+        "packagesPath": "C:\\Users\\Kamil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kamil\\Source\\Repos\\StudentAssistantApp-test\\StudentAssistantApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\serge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kamil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

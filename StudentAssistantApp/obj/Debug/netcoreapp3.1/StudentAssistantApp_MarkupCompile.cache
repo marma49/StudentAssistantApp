@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\
+C:\Users\Kamil\Source\Repos\StudentAssistantApp-test\StudentAssistantApp\obj\Debug\netcoreapp3.1\
 StudentAssistantApp
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\App.xaml
+C:\Users\Kamil\Source\Repos\StudentAssistantApp-test\StudentAssistantApp\App.xaml
 7508971991
 
-19-614945858
-204478061309
+20954156139
+204-440697237
 Views\CalendarWindowView.xaml;Views\GradesWindowView.xaml;Views\LoginFormView.xaml;Views\MainWindowView.xaml;Views\NotesWindowView.xaml;Views\OptionsWindowView.xaml;Views\TasksWindowView.xaml;
 
 False

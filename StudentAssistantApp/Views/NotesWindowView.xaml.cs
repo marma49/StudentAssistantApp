@@ -10,6 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 
 namespace StudentAssistantApp.Views
 {
@@ -21,6 +26,15 @@ namespace StudentAssistantApp.Views
         public NotesWindowView()
         {
             InitializeComponent();
+        }
+
+        private async void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            await DialogHost.Show(DialogSave.DialogContent, "IdDialogSave");
+        }
+        private async void ButtonOpen_Click(object sender, RoutedEventArgs e)
+        {
+            await DialogHost.Show(DialogOpen.DialogContent, "IdDialogOpen");
         }
     }
 }
