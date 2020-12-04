@@ -6,8 +6,8 @@
       "version": "3.1.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\marma\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\marma\\.nuget\\packages",
+      "C:\\Users\\serge\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\serge\\.nuget\\packages",
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ],
     "configProperties": {

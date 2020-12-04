@@ -3,87 +3,103 @@ using StudentAssistantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace StudentAssistantApp.ViewModels
 {
 
     class GradesWindowViewModel : Screen
     {
-        public BindableCollection<GradeModel> g1 = new BindableCollection<GradeModel>();
-        public BindableCollection<GradeModel> g2 = new BindableCollection<GradeModel>();
-        public BindableCollection<GradeModel> g3 = new BindableCollection<GradeModel>();
+        private BindableCollection<SubjectModel> subjects = new BindableCollection<SubjectModel>();
 
-        private BindableCollection<SubjectModel> _subjects = new BindableCollection<SubjectModel>();
-
-        private string _newSubject = "";
-        private SubjectModel _trashSubject;
+        private string newSubject = "";
+        private SubjectModel chosenSubject;
+        private bool isDialogOpen = false;
+        private double grade = 0;
 
         public GradesWindowViewModel()
         {
-            g1.Add(new GradeModel(5, 1, new DateTime(2015, 12, 25)));
-            g1.Add(new GradeModel(3, 3, new DateTime(2015, 11, 10)));
-            g1.Add(new GradeModel(1, 2, new DateTime(2015, 12, 25)));
-            g1.Add(new GradeModel(3, 3, new DateTime(2015, 12, 27)));
-            g1.Add(new GradeModel(3, 1, new DateTime(2015, 10, 13)));
-
-            g2.Add(new GradeModel(4, 2, new DateTime(2017, 5, 3)));
-            g2.Add(new GradeModel(1, 3, new DateTime(2017, 6, 13)));
-
-            g3.Add(new GradeModel(1, 5, new DateTime(2016, 6, 10)));
-            g3.Add(new GradeModel(6, 3, new DateTime(2017, 4, 15)));
-            g3.Add(new GradeModel(5, 1, new DateTime(2017, 4, 10)));
-
-            Subjects.Add(new SubjectModel("Matematyka", g1));
-            Subjects.Add(new SubjectModel("Fizyka", g2));
-            Subjects.Add(new SubjectModel("Geografia", g3));
+            Subjects.Add(new SubjectModel
+            {
+                SubjectName = "Fizyka",
+                Grades = new BindableCollection<GradeModel>() {
+                new GradeModel { Date = DateTime.Now, GradeValue = 5},
+                new GradeModel { Date = DateTime.Now, GradeValue = 2},
+            }
+            });
         }
-
 
         public BindableCollection<SubjectModel> Subjects
         {
-            get { return _subjects; }
-            set { _subjects = value; }
+            get { return subjects; }
+            set { subjects = value; }
         }
 
         public string NewSubject
         {
             get
             {
-                return _newSubject;
+                return newSubject;
             }
             set
             {
-                _newSubject = value;
+                newSubject = value;
                 NotifyOfPropertyChange(() => NewSubject);
             }
         }
 
-        public SubjectModel TrashSubject
+        public bool IsDialogOpen
         {
             get
             {
-                return _trashSubject;
+                return isDialogOpen;
             }
             set
             {
-                _trashSubject = value;
-                NotifyOfPropertyChange(() => TrashSubject);
+                isDialogOpen = value;
+                NotifyOfPropertyChange("IsDialogOpen");
+            }
+        }
+
+        public double Grade
+        {
+            get
+            {
+                return grade;
+            }
+            set
+            {
+                grade = value;
+                NotifyOfPropertyChange("Grade");
             }
         }
 
         public void AddSubject()
         {
-            if (NewSubject.Length > 0)
-                Subjects.Add(new SubjectModel(NewSubject, g2));
-            return;
+            if (NewSubject.Length > 0 && !Subjects.Any(n => n.SubjectName == NewSubject))
+            {
+                Subjects.Add(new SubjectModel { SubjectName = NewSubject, Grades = new BindableCollection<GradeModel>() });
+            }
+
         }
 
         public void RemoveSubject()
         {
-            Subjects.Remove(TrashSubject);
+
         }
 
+        public void AddNewGrade()
+        {
+            chosenSubject.Grades.Add(new GradeModel { Date = DateTime.Now, GradeValue = Grade });
+            Grade = 0;
+            IsDialogOpen = false;
+        }
 
+        public void OpenDialog(string subjectName)
+        {
+            IsDialogOpen = true;
+            chosenSubject = Subjects.First(n => n.SubjectName == subjectName);
+        }
     }
 
 
