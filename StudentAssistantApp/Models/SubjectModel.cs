@@ -8,18 +8,11 @@ namespace StudentAssistantApp.Models
     public class SubjectModel
     {
         public string SubjectName { get; set; }
-        private BindableCollection<GradeModel> _grades = new BindableCollection<GradeModel>();
-
-        public SubjectModel(string SubjectName, BindableCollection<GradeModel> Grades)
-        {
-            this.SubjectName = SubjectName;
-            this.Grades = Grades;
-        }
-
+        private BindableCollection<GradeModel> grades = new BindableCollection<GradeModel>();
         public BindableCollection<GradeModel> Grades
         {
-            get { return _grades; }
-            set { _grades = value; }
+            get { return grades; }
+            set { grades = value; }
         }
     }
 }
