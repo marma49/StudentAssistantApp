@@ -18,7 +18,6 @@ namespace StudentAssistantApp.ViewModels
         private double grade = 0;
         private int selectedItemToRemove = -1;
 
-
         public GradesWindowViewModel()
         {
             Subjects.Add(new SubjectModel
