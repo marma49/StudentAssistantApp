@@ -16,6 +16,8 @@ namespace StudentAssistantApp.ViewModels
         private SubjectModel chosenSubject;
         private bool isDialogOpen = false;
         private double grade = 0;
+        private int selectedItemToRemove = -1;
+
 
         public GradesWindowViewModel()
         {
@@ -74,18 +76,35 @@ namespace StudentAssistantApp.ViewModels
             }
         }
 
+        public int SelectedItemToRemove
+        {
+            get
+            {
+                return selectedItemToRemove;
+            }
+            set
+            {
+                selectedItemToRemove = value;
+                NotifyOfPropertyChange("SelectedItemToRemove");
+            }
+        }
+
         public void AddSubject()
         {
             if (NewSubject.Length > 0 && !Subjects.Any(n => n.SubjectName == NewSubject))
             {
                 Subjects.Add(new SubjectModel { SubjectName = NewSubject, Grades = new BindableCollection<GradeModel>() });
+                NewSubject = "";
             }
 
         }
 
         public void RemoveSubject()
         {
-
+            if (SelectedItemToRemove != -1)
+            {
+                Subjects.RemoveAt(SelectedItemToRemove);
+            }
         }
 
         public void AddNewGrade()
