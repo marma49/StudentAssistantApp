@@ -83,7 +83,7 @@
                     Background="#ffb525" Foreground="#28324b"
                     cal:Message.Attach="[Event Click] = [Action RemoveSubject]"/>
 
-                        <ComboBox x:Name="TrashSubject" ItemsSource="{Binding Subjects}" Cursor="Hand"
+                        <ComboBox x:Name="TrashSubject" ItemsSource="{Binding Subjects}" Cursor="Hand" SelectedIndex="{Binding SelectedItemToRemove}"
                               Width="150" Background="White" VerticalContentAlignment="Center" Padding="5">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
