@@ -92,7 +92,7 @@ namespace StudentAssistantApp.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/StudentAssistantApp;V1.0.0.0;component/views/noteswindowview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StudentAssistantApp;component/views/noteswindowview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\NotesWindowView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
