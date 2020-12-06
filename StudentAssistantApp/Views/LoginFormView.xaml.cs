@@ -1,5 +1,4 @@
-﻿using StudentAssistantApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -9,17 +8,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace StudentAssistantApp.Views
 {
     /// <summary>
-    /// Interaction logic for TasksWindowView.xaml
+    /// Interaction logic for LoginFormView.xaml
     /// </summary>
-    public partial class TasksWindowView : UserControl
+    public partial class LoginFormView : Window
     {
-        public TasksWindowView()
+        public LoginFormView()
         {
             InitializeComponent();
         }

@@ -4,9 +4,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentAssistantApp.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Aqua">
-            
+             d:DesignHeight="600" d:DesignWidth="800" FontSize="22"
+             >
+    <Grid>
+        <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="50 30">
+                    <StackPanel>
+                        <Label Content="Add new grade" Margin= "0 0 0 15" FontSize="15" HorizontalAlignment="Center"/>
+                        <TextBox materialDesign:HintAssist.Hint="New grade" Width="150" Text="{Binding Grade}"/>
+                     </StackPanel>
+                    
+                     <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
+                        <Button Content="Close" Margin="10 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        <Button Content="Accept" Margin="10 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade]"/>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+
+            <Grid Background="#28324b">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Subjects}" Grid.Column="0" Grid.Row="0" Foreground="White"  Margin="20 20 0 0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                                        <TextBlock x:Name="txtSubject" Text="{Binding SubjectName}"/>
+                                        <Button Content="{materialDesign:PackIcon Plus}" 
+                                                cal:Message.Attach="[Event Click] = [Action OpenDialog(txtSubject.Text)]"
+                                                ToolTip="Add new grade" BorderBrush="{x:Null}" Opacity="0.5" 
+                                                Foreground="#28324b" Background="#fff" Width="25" Height="25" Padding="0" Margin="15 0 0 0"/>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Grades}">
+
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"  Margin="0 0 0 20"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Content="{Binding GradeValue}" MinWidth="50" MinHeight="50" 
+                                                    Margin="0 0 8 8" Background="#ffb525" Foreground="#28324b" FontSize="24"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0 0 0 20">
+                    <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                        <Button x:Name="AddSubject" Content="Add subject" Width="150"
+                    Background="#ffb525" Foreground="#28324b"  Margin="0 0 0 10"
+                    cal:Message.Attach="[Event Click] = [Action AddSubject]" />
+
+                        <TextBox x:Name="NewSubject" Background="White" Width="150" Padding="2" 
+                     Foreground="#28324b" FontSize="16"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                        <Button x:Name="RemoveSubject" Content="Remove subject" Width="150" Margin="0 0 0 10"
+                    Background="#ffb525" Foreground="#28324b"
+                    cal:Message.Attach="[Event Click] = [Action RemoveSubject]"/>
+
+                        <ComboBox x:Name="TrashSubject" ItemsSource="{Binding Subjects}" Cursor="Hand" SelectedIndex="{Binding SelectedItemToRemove}"
+                              Width="150" Background="White" VerticalContentAlignment="Center" Padding="5">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SubjectName}" Foreground="#28324b" FontSize="16"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:DialogHost>
     </Grid>
 </UserControl>
