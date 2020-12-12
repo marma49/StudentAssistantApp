@@ -16,6 +16,8 @@ namespace StudentAssistantApp.ViewModels
         private SubjectModel chosenSubject;
         private bool isDialogOpen = false;
         private double grade = 0;
+        private double minGrade = 1;
+        private double maxGrade = 5;
         private int selectedItemToRemove = -1;
 
         public GradesWindowViewModel()
@@ -70,9 +72,34 @@ namespace StudentAssistantApp.ViewModels
             }
             set
             {
+
+                if (value < minGrade || value > maxGrade)
+                {
+                    HelperTextGrade = $"Put value from interval {minGrade} - {maxGrade}";
+                }
+                else
+                {
+                    HelperTextGrade = "";
+                }
+
                 grade = value;
                 NotifyOfPropertyChange("Grade");
+                NotifyOfPropertyChange("HelperTextGrade");
             }
+        }
+
+        public string HelperTextGrade { get; set; } = "";
+
+        public double MinGrade
+        {
+            get { return minGrade; }
+            set { minGrade = value; }
+        }
+
+        public double MaxGrade
+        {
+            get { return maxGrade; }
+            set { maxGrade = value; }
         }
 
         public int SelectedItemToRemove
@@ -106,11 +133,20 @@ namespace StudentAssistantApp.ViewModels
             }
         }
 
-        public void AddNewGrade()
+        public void AddNewGrade(double grade)
         {
             chosenSubject.Grades.Add(new GradeModel { Date = DateTime.Now, GradeValue = Grade });
             Grade = 0;
             IsDialogOpen = false;
+        }
+
+        public bool CanAddNewGrade (double grade)
+        {
+            if (grade < minGrade || grade > maxGrade)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void OpenDialog(string subjectName)
