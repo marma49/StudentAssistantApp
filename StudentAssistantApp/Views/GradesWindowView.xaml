@@ -15,12 +15,14 @@
                 <StackPanel Margin="50 30">
                     <StackPanel>
                         <Label Content="Add new grade" Margin= "0 0 0 15" FontSize="15" HorizontalAlignment="Center"/>
-                        <TextBox materialDesign:HintAssist.Hint="New grade" Width="150" Text="{Binding Grade}"/>
+                        <TextBox x:Name="gradeBox" materialDesign:HintAssist.Hint="New grade" 
+                                 materialDesign:HintAssist.HelperText="{Binding HelperTextGrade}"
+                                 Width="150" Text="{Binding Grade, UpdateSourceTrigger=PropertyChanged}"/>
                      </StackPanel>
                     
                      <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
                         <Button Content="Close" Margin="10 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button Content="Accept" Margin="10 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade]"/>
+                        <Button Content="Accept" Margin="10 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade(gradeBox.Text)]"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
