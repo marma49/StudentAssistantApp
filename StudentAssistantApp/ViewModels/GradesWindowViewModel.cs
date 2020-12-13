@@ -13,6 +13,7 @@ namespace StudentAssistantApp.ViewModels
         private BindableCollection<SubjectModel> subjects = new BindableCollection<SubjectModel>();
 
         private string newSubject = "";
+        private string helperTextGrade = "";
         private SubjectModel chosenSubject;
         private bool isDialogOpen = false;
         private double grade = 0;
@@ -72,7 +73,6 @@ namespace StudentAssistantApp.ViewModels
             }
             set
             {
-
                 if (value < minGrade || value > maxGrade)
                 {
                     HelperTextGrade = $"Put value from interval {minGrade} - {maxGrade}";
@@ -88,7 +88,18 @@ namespace StudentAssistantApp.ViewModels
             }
         }
 
-        public string HelperTextGrade { get; set; } = "";
+        public string HelperTextGrade
+        {
+            get
+            {
+                return helperTextGrade;
+            }
+            set
+            {
+                helperTextGrade = value;
+                NotifyOfPropertyChange("HelperTextGrade");
+            }
+        }
 
         public double MinGrade
         {
@@ -138,9 +149,10 @@ namespace StudentAssistantApp.ViewModels
             chosenSubject.Grades.Add(new GradeModel { Date = DateTime.Now, GradeValue = Grade });
             Grade = 0;
             IsDialogOpen = false;
+            HelperTextGrade = "";
         }
 
-        public bool CanAddNewGrade (double grade)
+        public bool CanAddNewGrade(double grade)
         {
             if (grade < minGrade || grade > maxGrade)
             {
