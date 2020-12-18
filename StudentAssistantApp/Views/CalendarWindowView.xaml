@@ -137,7 +137,7 @@
         </Style>
 
         <Style x:Key="MaterialDesignCalendarDayButton" TargetType="{x:Type CalendarDayButton}">
-            <Setter Property="ToolTip" Value="Double toup!"/>
+            <Setter Property="ToolTip" Value="Double tap!"/>
             <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
             <Setter Property="MinWidth" Value="5"/>
             <Setter Property="MinHeight" Value="5"/>
@@ -151,7 +151,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CalendarDayButton}">
-                        <Grid cal:Message.Attach="[Event MouseUp] = [Action AddEvent]">
+                        <Grid cal:Message.Attach="[Event MouseUp] = [Action OpenNewEvenDialog]">
+                            <!--cal:Message.Attach="[Event MouseUp] = [Action OpenNewEvenDialog]"-->
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -254,7 +255,7 @@
                                  Stroke="{TemplateBinding Foreground}"/>
                             <Ellipse x:Name="SelectedBackground"
                                  Fill="{DynamicResource PrimaryHueMidBrush}"
-                                 Opacity="0" />
+                                 Opacity="0"/>
                             <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"/>
@@ -268,7 +269,7 @@
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           Margin="5,1,5,1"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <Ellipse x:Name="DayButtonFocusVisual"
                                  Stroke="{DynamicResource PrimaryHueDarkBrush}"
                                  Opacity="0"
@@ -663,54 +664,87 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
+            <materialDesign:DialogHost.DialogContent>
+                <TextBlock Text="Some content"/>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <!--Calendar-->
-        <Calendar Grid.Column="0" Style="{StaticResource MaterialDesignCalendarPortraitCustom}" SelectedDate="{Binding SelectedDate}">
-        </Calendar>
-        <!--END Calendar-->
+                <!--Calendar-->
+                <Calendar Grid.Column="0" Style="{StaticResource MaterialDesignCalendarPortraitCustom}" SelectedDate="{Binding SelectedDate}">
+                </Calendar>
+                <!--END Calendar-->
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Rectangle Grid.Row="0" Fill="#1c2335" Height="79" Margin="-2 0 0 0">
-            </Rectangle>
-                <ScrollViewer Grid.Row="1">
-                    <ItemsControl ItemsSource="{Binding Events}" Margin="15 0 0 0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                            <materialDesign:Card Background="#596b99" Margin="8 8" ToolTip="Double toup to see more!"
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Fill="#1c2335" Height="79" Margin="-2 0 0 0">
+                    </Rectangle>
+                    <ScrollViewer Grid.Row="1">
+                        <ItemsControl ItemsSource="{Binding Events}" Margin="15 0 0 0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <materialDesign:Card Background="#596b99" Margin="8 8" ToolTip="Double tap to see more!"
                                                  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                                                 Padding="0" Width="200">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Margin="16 16 16 4" Text="{Binding EventName}"
+                                                 Padding="0" Width="200" cal:Message.Attach="[Event MouseDoubleClick] = [Action ShowFullEvent($source)]">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Margin="16 16 16 4" Text="{Binding EventName}"
                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="15"/>
-                                        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
-                                    <TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" Text="{Binding EventDate}"
+                                            <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                                            <TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" Text="{Binding EventDate}"
                                                HorizontalAlignment="Left" Style="{StaticResource MaterialDesignBody2TextBlock}"/>
-                                    </Grid>
-                                </materialDesign:Card>
+                                        </Grid>
+                                    </materialDesign:Card>
 
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-        </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+
+            </Grid>
+        </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost IsOpen="{Binding IsNewEventDialogOpen}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Height="350"  Width="350">
+                    <Label Content="Dodaj nowe wydarzenie!" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
+                    <StackPanel Margin="50 80">
+                        <TextBox x:Name="EventName" Padding="0 2" Text="{Binding EventName}"
+                              materialDesign:HintAssist.Hint="Event name">
+                        </TextBox>
+                        <TextBox x:Name="TaskExplanation" Text="{Binding EventExplanation}"
+                                 TextWrapping="Wrap"
+                                 Height="80"
+                                 Margin="0 50 0 0"
+                                 materialDesign:HintAssist.Hint="This is a text area" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                                cal:Message.Attach="[Event Click] = [Action CloseNewEvenDialog]"/>
+                        <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                                cal:Message.Attach="[Event Click] = [Action AddEvent]"/>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
 
     </Grid>
 </UserControl>
