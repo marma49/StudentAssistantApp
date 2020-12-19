@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using StudentAssistantApp.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,6 +16,7 @@ namespace StudentAssistantApp.ViewModels
         private bool isNewEventDialogOpen = false;
         private string eventName;
         private string eventExplanation;
+        private int eventOrderNum = 0, eventIndex = 0;
 
 
         public bool IsDialogOpen
@@ -65,15 +67,12 @@ namespace StudentAssistantApp.ViewModels
         public CalendarWindowViewModel()
         {
             SelectedDate = DateTime.Now;
-            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt") });
-            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt") });
-            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt") });
-            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt") });
+            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), EventId = eventOrderNum++ });
         }
 
         public void AddEvent()
         {
-            Events.Add(new EventModel { EventName = EventName, EventExplanation = EventExplanation, EventDate = SelectedDate.ToString("MM/dd/yyyy hh:mm tt") });
+            Events.Add(new EventModel { EventName = EventName, EventExplanation = EventExplanation, EventDate = SelectedDate.ToString("MM/dd/yyyy hh:mm tt"), EventId = eventOrderNum++ });
             IsNewEventDialogOpen = false;
         }
 
@@ -89,9 +88,19 @@ namespace StudentAssistantApp.ViewModels
             IsNewEventDialogOpen = false;
         }
 
-        public void ShowFullEvent(object source)
+        public void ShowFullEvent(string tag)
         {
+            int eventId = int.Parse(tag);
+            EventModel eventModel = Events.Where(n => n.EventId == eventId).First();
+
             IsDialogOpen = true;
+            EventName = eventModel.EventName;
+            EventExplanation = eventModel.EventExplanation;
+        }
+
+        public void HideFullEvent ()
+        {
+            IsDialogOpen = false;
         }
 
     }

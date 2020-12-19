@@ -52,7 +52,7 @@ namespace StudentAssistantApp.ViewModels
 
         public TasksWindowViewModel()
         {
-            //Tasks.Add(new TaskModel { TaskName = "Skończyć projekt", TaskExplanation="Skończyć zadanie domowe z programowania", TaskID = itemCount++}); //TODO Сделать ограничение на длинну названия задания
+            //Tasks.Add(new TaskModel { TaskName = "Skończyć projekt", TaskExplanation="Skończyć zadanie domowe z programowania", TaskID = itemCount++}); //TODO Показывать название при наведении мышки
             //Tasks.Add(new TaskModel { TaskName = "Styudia", TaskExplanation="Zrobić zadanie z programowania!", TaskID = itemCount++ }); 
             //Tasks.Add(new TaskModel { TaskName = "Impreza", TaskExplanation="Napić się piwka!", TaskID = itemCount++});
             
