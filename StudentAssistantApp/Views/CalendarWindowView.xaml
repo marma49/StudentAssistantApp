@@ -665,6 +665,7 @@
 
     <Grid>
 
+        <!--Show event dialog section-->
         <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
                 <Grid Height="350"  Width="450">
@@ -732,21 +733,27 @@
             </Grid>
         </materialDesign:DialogHost>
 
+        <!--New event dialog section-->
         <materialDesign:DialogHost IsOpen="{Binding IsNewEventDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
-                <Grid Height="350"  Width="350">
+                <Grid Height="370"  Width="370">
                     <Label Content="Dodaj nowe wydarzenie!" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
                     <StackPanel Margin="50 80">
                         <TextBox x:Name="EventName" Padding="0 2" Text="{Binding EventName}"
-                              materialDesign:HintAssist.Hint="Event name">
-                        </TextBox>
+                              materialDesign:HintAssist.Hint="Event name"/>
                         <TextBox x:Name="TaskExplanation" Text="{Binding EventExplanation}"
                                  TextWrapping="Wrap"
                                  Height="80"
-                                 Margin="0 50 0 0"
+                                 Margin="0 40 0 0"
                                  materialDesign:HintAssist.Hint="This is a text area" />
+                        <!--Time picker-->
+                        <materialDesign:TimePicker Is24Hours="True" 
+                                                   x:Name="PresetTimePicker" 
+                                                   Width="100" Margin="0 25" HorizontalAlignment="Left"
+                                                   SelectedTime="{Binding SelectedTime}"
+                                                   />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 25" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                         <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
                                 cal:Message.Attach="[Event Click] = [Action CloseNewEvenDialog]"/>
                         <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"

@@ -12,6 +12,8 @@ namespace StudentAssistantApp.ViewModels
         BindableCollection<EventModel> events = new BindableCollection<EventModel>();
         public BindableCollection<EventModel> Events { get => events; private set => events = value; }
         private DateTime selectedDate;
+        private DateTime selectedTime;
+        private DateTime fullDate;
         private bool isDialogOpen = false;
         private bool isNewEventDialogOpen = false;
         private string eventName;
@@ -57,22 +59,42 @@ namespace StudentAssistantApp.ViewModels
             }
         }
 
-
         public DateTime SelectedDate
         {
             get { return selectedDate; }
             set { selectedDate = value; NotifyOfPropertyChange("SelectedDate"); }
         }
 
+        public DateTime SelectedTime
+        {
+            get { return selectedTime; }
+            set
+            {
+                selectedTime = value;
+                NotifyOfPropertyChange("SelectedTime");
+            }
+        }
+
         public CalendarWindowViewModel()
         {
-            SelectedDate = DateTime.Now;
-            Events.Add(new EventModel { EventName = "The First Event Name!", EventDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), EventId = eventOrderNum++ });
         }
 
         public void AddEvent()
         {
-            Events.Add(new EventModel { EventName = EventName, EventExplanation = EventExplanation, EventDate = SelectedDate.ToString("MM/dd/yyyy hh:mm tt"), EventId = eventOrderNum++ });
+            fullDate = new DateTime(SelectedDate.Year,
+                                    SelectedDate.Month,
+                                    SelectedDate.Day,
+                                    SelectedTime.Hour,
+                                    SelectedTime.Minute,
+                                    SelectedTime.Second);
+
+            Events.Add(new EventModel
+            {
+                EventName = EventName,
+                EventExplanation = EventExplanation,
+                EventDate = fullDate.ToString("MM/dd/yyyy hh:mm tt"),
+                EventId = eventOrderNum++
+            });
             IsNewEventDialogOpen = false;
         }
 
@@ -98,7 +120,7 @@ namespace StudentAssistantApp.ViewModels
             EventExplanation = eventModel.EventExplanation;
         }
 
-        public void HideFullEvent ()
+        public void HideFullEvent()
         {
             IsDialogOpen = false;
         }
