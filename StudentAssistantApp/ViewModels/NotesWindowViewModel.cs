@@ -62,15 +62,36 @@ namespace StudentAssistantApp.ViewModels
 
         public NotesWindowViewModel()
         {
-            Notes.Add(new NoteModel { NoteName = "test1", NoteContent = "TEST1", NoteId = itemCount++ });
-            Notes.Add(new NoteModel { NoteName = "test2", NoteContent = "TEST2", NoteId = itemCount++ });
-            Notes.Add(new NoteModel { NoteName = "test3", NoteContent = "TEST3", NoteId = itemCount++ });
+            //Notes.Add(new NoteModel { NoteName = "test1", NoteContent = "TEST1", NoteId = itemCount++ });
+            //Notes.Add(new NoteModel { NoteName = "test2", NoteContent = "TEST2", NoteId = itemCount++ });
+            //Notes.Add(new NoteModel { NoteName = "test3", NoteContent = "TEST3", NoteId = itemCount++ });
+
+            //Pobranie notatek z bazy danych
+            using (var context = new StudentAppContext())
+            {
+                var notes = context.DBNotes.ToList();
+                foreach (DBNote n1 in notes)
+                {
+                    Notes.Add(new NoteModel { NoteName = n1.NoteHeadline, NoteContent = n1.NoteText, NoteId = n1.DBNoteId });
+                }
+            }
         }
 
         public void SaveNote()
         {
 
-            Notes.Add(new NoteModel { NoteName = noteName, NoteContent = noteContent, NoteId = itemCount++ });
+            //Dodanie notatki do bazy danych
+            int idIndex;
+            var dbnote = new DBNote { NoteHeadline = noteName, NoteText = noteContent };
+            using (var context = new StudentAppContext())
+            {
+                context.DBNotes.Add(dbnote);
+                context.SaveChanges();
+                var obiekt = context.DBNotes.OrderByDescending(x => x.DBNoteId).FirstOrDefault();
+                idIndex = obiekt.DBNoteId;
+            }
+
+            Notes.Add(new NoteModel { NoteName = noteName, NoteContent = noteContent, NoteId = idIndex });
 
             NoteName = "";
             NoteContent = "";
@@ -84,6 +105,15 @@ namespace StudentAssistantApp.ViewModels
             NoteName = Notes[index].NoteName;
             NoteContent = Notes[index].NoteContent;
 
+            /*DBNote note1; 
+            using(var context = new StudentAppContext())
+            {
+                note1 = context.DBNotes.Where(x => x.DBNoteId == index).FirstOrDefault();
+                note1.NoteHeadline = noteName;
+                note1.NoteText = NoteContent;
+
+                context.SaveChanges();
+            }*/
             IsDialogOpen = false;
         }
 

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\
+D:\Users\Micha\Desktop\Documenty\zdalne_elo\Programowanie zwinne\StudentAssistantApp\20.12\Git\StudentAssistantApp\StudentAssistantApp\obj\Debug\netcoreapp3.1\
 StudentAssistantApp
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\serge\Desktop\UEK\StudentAssistantApp\StudentAssistantApp\App.xaml
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
+D:\Users\Micha\Desktop\Documenty\zdalne_elo\Programowanie zwinne\StudentAssistantApp\20.12\Git\StudentAssistantApp\StudentAssistantApp\App.xaml
 7508971991
 
-33-1855436591
-225-1990786999
+351655395686
+225-1242836151
 Views\CalendarWindowView.xaml;Views\GradesWindowView.xaml;Views\LoginFormView.xaml;Views\MainWindowView.xaml;Views\NotesWindowView.xaml;Views\OptionsWindowView.xaml;Views\TasksWindowView.xaml;
 
-True
+False
 

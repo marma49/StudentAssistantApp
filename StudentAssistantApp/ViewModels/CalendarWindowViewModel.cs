@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using StudentAssistantApp.Models;
+using StudentAssistantApp.ModelsDB;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -77,6 +78,21 @@ namespace StudentAssistantApp.ViewModels
 
         public CalendarWindowViewModel()
         {
+            //Pobranie i wyswietlenie danych z bazy danych
+            using(var context = new StudentAppContext())
+            {
+                var events = context.DBEvents.ToList();
+                foreach(DBEvent e1 in events)
+                {
+                    Events.Add(new EventModel 
+                    { 
+                        EventName = e1.EventTitle,
+                        EventExplanation = e1.EventContent,
+                        EventDate = e1.DateEvent.ToString("MM/dd/yyyy hh:mm tt"),
+                        EventId = e1.DBEventId
+                    });
+                }
+            }
         }
 
         public void AddEvent()
@@ -87,13 +103,25 @@ namespace StudentAssistantApp.ViewModels
                                     SelectedTime.Hour,
                                     SelectedTime.Minute,
                                     SelectedTime.Second);
+         
+
+            //Dodanie do bazy danych
+            int orderId;
+            var dbevent = new DBEvent { EventTitle = eventName, EventContent = eventExplanation, DateEvent = fullDate };
+            using(StudentAppContext context = new StudentAppContext())
+            {
+                context.DBEvents.Add(dbevent);
+                context.SaveChanges();
+                var ostatni = context.DBEvents.OrderByDescending(x => x.DBEventId).FirstOrDefault();
+                orderId = ostatni.DBEventId;
+            }
 
             Events.Add(new EventModel
             {
                 EventName = EventName,
                 EventExplanation = EventExplanation,
                 EventDate = fullDate.ToString("MM/dd/yyyy hh:mm tt"),
-                EventId = eventOrderNum++
+                EventId = orderId
             });
             IsNewEventDialogOpen = false;
         }

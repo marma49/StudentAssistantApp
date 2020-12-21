@@ -3,6 +3,7 @@ using Microsoft.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using StudentAssistantApp.ModelsDB;
 
 namespace StudentAssistantApp.Models
 {
@@ -12,9 +13,11 @@ namespace StudentAssistantApp.Models
         public DbSet<DBMark> DBMarks { get; set; }
         public DbSet<DBUser> DBUsers { get; set; }
         public DbSet<DBNote> DBNotes { get; set; }
+        public DbSet<DBEvent> DBEvents { get; set; }
+        public DbSet<DBSubject> DBSubjects { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-0F2A56E\SQLEXPRESS;Initial Catalog=StudentAssistentDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=StudentAssistentDB;Integrated Security=True");
         }
     }
 }
