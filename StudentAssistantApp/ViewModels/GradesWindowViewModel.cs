@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using StudentAssistantApp.Models;
+using StudentAssistantApp.ModelsDB;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,28 @@ namespace StudentAssistantApp.ViewModels
 
         public GradesWindowViewModel()
         {
+            using(var context = new StudentAppContext())
+            {
+                //Pobranie i wyświetlenie przedmiotow i ocen
+                var dbsubjects = context.DBSubjects.ToList();
+                var dbmarks = context.DBMarks.ToList();
+                foreach(DBSubject s1 in dbsubjects)
+                {
+                    var lista = dbmarks.Where(x => x.Subject == s1.SubjectName).ToList();
+                    BindableCollection<GradeModel> gm1 = new BindableCollection<GradeModel>();
+                    foreach (DBMark mark1 in lista)
+                    {
+                        gm1.Add( new GradeModel { Date = mark1.Date, GradeValue = mark1.Mark });
+                    }
+                    
+                        Subjects.Add(new SubjectModel
+                        {
+                            SubjectName = s1.SubjectName,
+                            Grades = gm1
+                        });
+                    
+                }
+            }
             Subjects.Add(new SubjectModel
             {
                 SubjectName = "Fizyka",
@@ -130,6 +153,14 @@ namespace StudentAssistantApp.ViewModels
         {
             if (NewSubject.Length > 0 && !Subjects.Any(n => n.SubjectName == NewSubject))
             {
+                //Zapisanie przedmiotu do bazy danych
+                var dbsubject = new DBSubject { SubjectName = newSubject}; 
+                using(var context = new StudentAppContext())
+                {
+                    context.DBSubjects.Add(dbsubject);
+
+                    context.SaveChanges();
+                }
                 Subjects.Add(new SubjectModel { SubjectName = NewSubject, Grades = new BindableCollection<GradeModel>() });
                 NewSubject = "";
             }
@@ -146,6 +177,14 @@ namespace StudentAssistantApp.ViewModels
 
         public void AddNewGrade(double grade)
         {
+            //Dodanie oceny do bazy danych
+            var dbmark = new DBMark { Mark = int.Parse(Grade.ToString()), Date = DateTime.Now, Subject = newSubject };
+            using(var context = new StudentAppContext())
+            {
+                context.DBMarks.Add(dbmark);
+
+                context.SaveChanges();
+            }
             chosenSubject.Grades.Add(new GradeModel { Date = DateTime.Now, GradeValue = Grade });
             Grade = 0;
             IsDialogOpen = false;

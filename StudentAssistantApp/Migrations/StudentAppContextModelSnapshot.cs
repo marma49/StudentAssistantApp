@@ -26,6 +26,9 @@ namespace StudentAssistantApp.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("DBSubjectId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -38,7 +41,12 @@ namespace StudentAssistantApp.Migrations
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("DBMarkId");
+
+                    b.HasIndex("DBSubjectId");
 
                     b.ToTable("DBMarks");
                 });
@@ -104,6 +112,56 @@ namespace StudentAssistantApp.Migrations
                     b.HasKey("DBUserId");
 
                     b.ToTable("DBUsers");
+                });
+
+            modelBuilder.Entity("StudentAssistantApp.ModelsDB.DBEvent", b =>
+                {
+                    b.Property<int>("DBEventId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("DateEvent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DBEventId");
+
+                    b.ToTable("DBEvents");
+                });
+
+            modelBuilder.Entity("StudentAssistantApp.ModelsDB.DBSubject", b =>
+                {
+                    b.Property<int>("DBSubjectId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("SubjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DBSubjectId");
+
+                    b.ToTable("DBSubjects");
+                });
+
+            modelBuilder.Entity("StudentAssistantApp.Models.DBMark", b =>
+                {
+                    b.HasOne("StudentAssistantApp.ModelsDB.DBSubject", "DBSubject")
+                        .WithMany("Marks")
+                        .HasForeignKey("DBSubjectId");
+
+                    b.Navigation("DBSubject");
+                });
+
+            modelBuilder.Entity("StudentAssistantApp.ModelsDB.DBSubject", b =>
+                {
+                    b.Navigation("Marks");
                 });
 #pragma warning restore 612, 618
         }

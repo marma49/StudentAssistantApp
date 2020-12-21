@@ -85,6 +85,7 @@ namespace StudentAssistantApp.ViewModels
                 Tasks.Refresh(); //Raises a change notification indicating that all bindings should be refreshed.
 
                 //Modyfikacja w bazie
+                /*
                 using (var context = new StudentAppContext())
                 {
                     DBTask DBTask = context.DBTasks.Where(x => x.DBTaskId == 4).FirstOrDefault(); //Do poprawy idIndex
@@ -92,20 +93,23 @@ namespace StudentAssistantApp.ViewModels
                     DBTask.TaskText = TaskExplanation;
 
                     context.SaveChanges();
-                }
+                }*/
             }
             else
             {
-                tasks.Add(new TaskModel { TaskName = taskName, TaskExplanation = taskExplanation, TaskID = itemCount++});
 
                 //Dodawanie do bazy
                 var dbtask = new DBTask { TaskHeadline = taskName, TaskText = taskExplanation };
+                int itemId;
                 using (var context = new StudentAppContext())
                 {
                     context.DBTasks.Add(dbtask);
-
                     context.SaveChanges();
+                    var obiektChwilowy = context.DBTasks.OrderByDescending(x => x.DBTaskId).FirstOrDefault();
+                    itemId = obiektChwilowy.DBTaskId;
                 }
+
+                tasks.Add(new TaskModel { TaskName = taskName, TaskExplanation = taskExplanation, TaskID = itemId });
             }
 
             TaskExplanation = "";
@@ -150,7 +154,15 @@ namespace StudentAssistantApp.ViewModels
             TaskName = Tasks[itemIndex].TaskName;
             TaskExplanation = Tasks[itemIndex].TaskExplanation;
 
-            
+            //Modyfikacja w bazie
+            using (var context = new StudentAppContext())
+            {
+                DBTask DBTask = context.DBTasks.Where(x => x.DBTaskId == itemindex).FirstOrDefault(); //Do poprawy idIndex
+                DBTask.TaskHeadline = TaskName;
+                DBTask.TaskText = TaskExplanation;
+
+                context.SaveChanges();
+            }
         }
     }
 }
