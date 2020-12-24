@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace StudentAssistantApp.ViewModels
 {
@@ -19,6 +20,7 @@ namespace StudentAssistantApp.ViewModels
         private bool isNewEventDialogOpen = false;
         private string eventName;
         private string eventExplanation;
+        EventModel eventModel; 
         private int eventOrderNum = 0, eventIndex = 0;
 
 
@@ -141,11 +143,18 @@ namespace StudentAssistantApp.ViewModels
         public void ShowFullEvent(string tag)
         {
             int eventId = int.Parse(tag);
-            EventModel eventModel = Events.Where(n => n.EventId == eventId).First();
+            eventModel = Events.Where(n => n.EventId == eventId).First();
 
             IsDialogOpen = true;
             EventName = eventModel.EventName;
             EventExplanation = eventModel.EventExplanation;
+        }
+
+        public async void DeleteEvent()
+        {
+            IsDialogOpen = false;
+            await Task.Delay(200);
+            Events.Remove(eventModel);
         }
 
         public void HideFullEvent()
