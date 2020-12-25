@@ -306,11 +306,11 @@
                             <SineEase x:Key="EasingFunction" EasingMode="EaseOut"/>
                             <CubicEase x:Key="EasingFunctionIn" EasingMode="EaseIn"/>
 
-                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                                <TextBlock Foreground="{DynamicResource MaterialDesignToolTipBackground}"
+                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}"> <!--Day styles--> 
+                                <TextBlock Foreground="{DynamicResource MaterialDesignToolTipBackground}" 
                                        Opacity="0.65"
                                        FontWeight="Bold"
-                                       FontSize="9.5"                                       
+                                       FontSize="20"          
                                        HorizontalAlignment="Center" VerticalAlignment="Center"
                                        Margin="0,6,0,6"
                                        Text="{Binding [0]}"/>
@@ -424,13 +424,14 @@
                                         Visibility="{TemplateBinding materialDesign:CalendarAssist.IsHeaderVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                         Height="Auto"
                                         Margin="20 12.5" />
+                                    <!--Current date block styles-->
                                     <TextBlock x:Name="CurrentDateTextBlock"
                                            Grid.Row="1" 
                                            Grid.Column="0"
                                            HorizontalAlignment="Left" 
                                            VerticalAlignment="Center"
-                                           Margin="13 8 8 8"
-                                           FontSize="14"
+                                           Margin="25 8 8 8"
+                                           FontSize="20"
                                            FontWeight="SemiBold"
                                            Opacity="0.56"
                                            RenderTransformOrigin="0, 0.5">
