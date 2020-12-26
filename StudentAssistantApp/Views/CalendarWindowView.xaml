@@ -254,7 +254,7 @@
                                  StrokeThickness="1"
                                  Stroke="{TemplateBinding Foreground}"/>
                             <Ellipse x:Name="SelectedBackground"
-                                 Fill="{DynamicResource PrimaryHueMidBrush}"
+                                 Fill="#ffb525"
                                  Opacity="0"/>
                             <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -262,7 +262,7 @@
                             <Border x:Name="HighlightingBorder"
                                 Opacity="1">
                                 <Ellipse x:Name="HighlightBackground"
-                                     Fill="{DynamicResource PrimaryHueDarkBrush}"
+                                     Fill="#ffb525"
                                      Opacity="0"/>
                             </Border>
                             <ContentPresenter x:Name="NormalText"
@@ -741,27 +741,39 @@
         <!--New event dialog section-->
         <materialDesign:DialogHost IsOpen="{Binding IsNewEventDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
-                <Grid Height="370"  Width="370">
-                    <Label Content="Dodaj nowe wydarzenie!" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
+                <Grid Height="370"  Width="370" Background="#28324b">
+                    <Label Content="Dodaj nowe wydarzenie!" Margin= "0 30 0 0" FontSize="15" Foreground="White" HorizontalAlignment="Center"/>
                     <StackPanel Margin="50 80">
                         <TextBox x:Name="EventName" Padding="0 2" Text="{Binding EventName}"
-                              materialDesign:HintAssist.Hint="Event name"/>
+                                 materialDesign:HintAssist.Hint="Event name"
+                                 Foreground="White" CaretBrush="White"
+                                 materialDesign:HintAssist.Foreground="White"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                 BorderBrush="#fff"/>
                         <TextBox x:Name="TaskExplanation" Text="{Binding EventExplanation}"
                                  TextWrapping="Wrap"
                                  Height="80"
                                  Margin="0 40 0 0"
-                                 materialDesign:HintAssist.Hint="This is a text area" />
+                                 materialDesign:HintAssist.Hint="This is a text area" 
+                                 Foreground="White" CaretBrush="White"
+                                 materialDesign:HintAssist.Foreground="White"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                 BorderBrush="#fff"/>
                         <!--Time picker-->
                         <materialDesign:TimePicker Is24Hours="True" 
                                                    x:Name="PresetTimePicker" 
                                                    Width="100" Margin="0 25" HorizontalAlignment="Left"
                                                    SelectedTime="{Binding SelectedTime}"
-                                                   />
+                                                   Foreground="White"
+                                                   materialDesign:HintAssist.Foreground="White"
+                                                   BorderBrush="#fff" 
+                                                   >
+                        </materialDesign:TimePicker>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 25" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                        <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action CloseNewEvenDialog]"/>
-                        <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                        <Button Content="Accept" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action AddEvent]"/>
                     </StackPanel>
                 </Grid>
