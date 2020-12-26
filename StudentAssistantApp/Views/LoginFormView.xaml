@@ -11,25 +11,31 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}" ResizeMode="NoResize"
-        Title="LoginFormView" Height="550" Width="350" Background="{x:Null}"
+        Title="LoginFormView" Height="550" Width="340" Background="{x:Null}"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
         >
-    <Border Background="{DynamicResource MaterialDesignPaper}" CornerRadius="15">
+    <Border Background="#28324b" CornerRadius="15">
         <Grid>
             <StackPanel Margin="40">
-                <Label Content="Student Assistant" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
-                <StackPanel Margin="20, 30">
-                    <TextBox materialDesign:HintAssist.Hint="Login" 
+                <Label Foreground="White" Content="Student Assistant" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
+                <StackPanel Margin="20 30">
+                    <TextBox materialDesign:HintAssist.Hint="Login" Foreground="White" CaretBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             BorderBrush="#fff"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Margin="10, 20"/>
-                    <PasswordBox materialDesign:HintAssist.Hint="Password"
+                             Margin="0 20"/>
+                    <PasswordBox materialDesign:HintAssist.Hint="Password" Foreground="White" CaretBrush="White"
+                                 materialDesign:HintAssist.Foreground="White"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                 BorderBrush="#fff"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                 Margin="10, 20"/>
+                                 Margin="0 20"/>
                 </StackPanel>
                 <StackPanel Margin="0 40 0 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="Close" Content="Close" Margin="15 0"/>
-                        <Button x:Name="LogIn" Content="Log In" Margin="15 0" />
+                        <Button x:Name="Close" Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
+                        <Button x:Name="LogIn" Content="Log In" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
