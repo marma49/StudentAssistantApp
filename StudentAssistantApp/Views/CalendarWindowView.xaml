@@ -1220,18 +1220,19 @@
         <!--Show event dialog section-->
         <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
-                <Grid Height="350"  Width="450">
+                <Grid Height="350"  Width="450" Background="#28324b">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 20 0 0" FontSize="15" Text="{Binding EventName}"/>
+                    <TextBlock Grid.Row="0" Foreground="#fff" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="0 20 0 0" FontSize="15" Text="{Binding EventName}"/>
                     <ScrollViewer  Grid.Row="1"  VerticalScrollBarVisibility="Auto">
-                        <TextBlock Text="{Binding EventExplanation}" TextWrapping="Wrap" Margin="20 20"/>
+                        <TextBlock Text="{Binding EventExplanation}" TextWrapping="Wrap" Margin="20 20" Foreground="#fff"/>
                     </ScrollViewer>
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-                        <Button Content="Close" Width="90" Margin="15 20" cal:Message.Attach="[Event Click] = [Action HideFullEvent]"/>
+                        <Button Content="Close" Width="90" Margin="15 20" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                                cal:Message.Attach="[Event Click] = [Action HideFullEvent]"/>
                         <Button Content="Delete" Width="90" Margin="15 20" cal:Message.Attach="[Event Click] = [Action DeleteEvent]" 
                                 Background="#e41e1e" BorderBrush="#e41e1e"/>
                     </StackPanel>
