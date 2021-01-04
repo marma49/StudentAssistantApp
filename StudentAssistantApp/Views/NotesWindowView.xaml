@@ -10,107 +10,99 @@
              xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
-            <DockPanel>
-                <TextBox x:Name="noteSpace" Text="{Binding NoteContent}" DockPanel.Dock="Top"
-                             HorizontalContentAlignment="Stretch"
-                             VerticalContentAlignment="Stretch"
-                             VerticalScrollBarVisibility="Visible"
-                             HorizontalScrollBarVisibility="Visible"
-                             AcceptsReturn="True"
-                             AcceptsTab="True">
+    <Grid Background="White">
 
-                </TextBox>
-            </DockPanel>
 
             <materialDesign:DialogHost x:Name="DialogOpen" Identifier="IdDialogOpen" IsOpen="{Binding IsDialogOpen}">
                 <materialDesign:DialogHost.DialogContent>
-                    <Grid Height="350"  Width="350">
-                        <Label Content="Open" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
+                    <Grid Height="350"  Width="350" Background="#28324b">
+                        <Label Content="Open" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/>
                         <ScrollViewer Margin="50 80">
-                            <ListBox x:Name="ListBoxOpen" ItemsSource="{Binding Notes}" SelectedItem="{Binding SelectedItem}" SelectionMode="Extended">
+                            <ListBox x:Name="ListBoxOpen" ItemsSource="{Binding Notes}" SelectedItem="{Binding SelectedItem}" SelectionMode="Extended" Margin="3 0">
                                 <ListBox.ItemContainerStyle>
-                                    <Style
-                                    TargetType="ListBoxItem"
-                                    BasedOn="{StaticResource MaterialDesignListBoxItem}">
-
+                                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                                         <Style.Triggers>
-                                            <Trigger
-                                            Property="IsSelected"
-                                            Value="True">
-                                                <Setter
-                                                Property="Background"
-                                                Value="{StaticResource SecondaryHueMidBrush}"
-                                                />
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#596b99" />
                                             </Trigger>
                                         </Style.Triggers>
-                                        <Setter
-                                        Property="Margin"
-                                        Value="0 2 0 0" />
+                                        <Setter Property="Cursor" Value="Hand"/>
                                     </Style>
                                 </ListBox.ItemContainerStyle>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock x:Name="SelectedNote" Text="{Binding NoteName}"/>
+                                        <TextBlock x:Name="SelectedNote" Text="{Binding NoteName}" Foreground="#fff" />
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </ScrollViewer>
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action CloseDialog]"/>
-                            <Button Content="Open" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            <Button Content="Open" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action LoadNote(ListBoxOpen.SelectedIndex)]"/>
                         </StackPanel>
                     </Grid>
                 </materialDesign:DialogHost.DialogContent>
-            </materialDesign:DialogHost>
+            <Grid Background="#28324b">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" x:Name="noteSpace" Text="{Binding NoteContent}"
+                             HorizontalContentAlignment="Stretch"
+                             VerticalContentAlignment="Stretch"
+                             VerticalScrollBarVisibility="Visible"
+                             AcceptsReturn="True"
+                             BorderThickness="0"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{x:Null}"
+                             Padding="5 0"
+                             TextWrapping="Wrap" 
+                             CaretBrush="#000"
+                             AcceptsTab="True" Background="#fff">
+
+               </TextBox>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0 15">
+
+                    <Button HorizontalAlignment="Right" Content="Save" Margin="15 0"
+                        Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        Click="ButtonOpen_Click"
+                        Width="120"/>
+
+                    <Button HorizontalAlignment="Right" Content="Open" Margin="15 0"
+                        Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        Click="ButtonSave_Click"
+                        Width="120"/>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost>
 
             <materialDesign:DialogHost x:Name="DialogSave" Identifier="IdDialogSave" IsOpen="{Binding IsDialogOpen}">
                 <materialDesign:DialogHost.DialogContent>
-                    <Grid Height="350"  Width="350">
-                        <Label Content="Save" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center"/>
+                    <Grid Height="350"  Width="350" Background="#28324b">
+                        <Label Content="Save" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/>
                         <StackPanel Margin="50 80">
                             <TextBox Padding="0 2" Text="{Binding NoteName}"
                               materialDesign:HintAssist.Hint="Note name"
-                              materialDesign:HintAssist.HelperText="Max 20 symbols">
-                            </TextBox>
+                              materialDesign:HintAssist.HelperText="Max 20 symbols"
+                              Foreground="White" CaretBrush="White"
+                              materialDesign:HintAssist.Foreground="White"
+                              materialDesign:TextFieldAssist.UnderlineBrush="White"
+                              BorderBrush="#fff"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Button Content="Close" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action CloseDialog]"/>
-                            <Button Content="Accept" Margin="15 0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            <Button Content="Accept" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action SaveNote]"/>
                         </StackPanel>
                     </Grid>
                 </materialDesign:DialogHost.DialogContent>
             </materialDesign:DialogHost>
 
-            <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 50 20"
-                        Background="#ffb525"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                       
-                        Click="ButtonSave_Click"
-                        Width="120"
-                        ToolTip="Click to save this note!">
-                Open
-            </Button>
-
-            <Button Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,195,20"
-                        Background="#ffb525"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        Click="ButtonOpen_Click"
-                        Width="120"
-                        ToolTip="Click to open a note!">
-                Save
-            </Button>
-
         </Grid>
-    </Grid>
 </UserControl>
