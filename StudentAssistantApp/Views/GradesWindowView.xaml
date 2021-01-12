@@ -12,19 +12,43 @@
     <Grid>
         <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
-                <StackPanel Margin="50 30">
-                    <StackPanel>
-                        <Label Content="Add new grade" Margin= "0 0 0 15" FontSize="15" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="gradeBox" materialDesign:HintAssist.Hint="New grade" 
-                                 materialDesign:HintAssist.HelperText="{Binding HelperTextGrade}"
-                                 Width="150" Text="{Binding Grade, UpdateSourceTrigger=PropertyChanged}"/>
-                     </StackPanel>
-                    
-                     <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
-                        <Button Content="Close" Margin="10 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button Content="Accept" Margin="10 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade(gradeBox.Text)]"/>
+                <!--Start Dialog window design-->
+                <Grid Height="350"  Width="350" Background="#fff">
+
+                    <Label Content="Zarządzanie oceną" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#28324b"/>
+
+                    <StackPanel Margin="50 80">
+                        <TextBox x:Name="gradeBox" Padding="0 2" Text="{Binding Grade}"
+                              materialDesign:HintAssist.Hint="Grade"
+                              materialDesign:HintAssist.HelperText="{Binding HelperTextGrade}"
+                                 Foreground="#28324b" CaretBrush="#28324b"
+                                 materialDesign:HintAssist.Foreground="#28324b"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
+                                 BorderBrush="#28324b">
+                        </TextBox>
+                        <TextBox x:Name="wageBox" Padding="0 2" Margin="0 30 0 0" Text="{Binding Wage}"
+                              materialDesign:HintAssist.Hint="Wage"
+                              materialDesign:HintAssist.HelperText="Put value from interval 0 - 100"
+                                 Foreground="#28324b" CaretBrush="#28324b"
+                                 materialDesign:HintAssist.Foreground="#28324b"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
+                                 BorderBrush="#28324b">
+                        </TextBox>
+                        <ComboBox x:Name="typesBox" SelectedItem="{Binding Path=SelectedType, Mode=OneWayToSource}" 
+                                  materialDesign:HintAssist.Hint="Type"
+                                  materialDesign:HintAssist.HelperText="Select type"
+                                  ItemsSource="{Binding TypesOfGrades}" Padding="0 2" Margin="0 30 0 0" Foreground="#28324b"  
+                                  materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
+                                  BorderBrush="#28324b"/>
                     </StackPanel>
-                </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Button Content="Close" Margin="15 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        <Button Content="Accept" Margin="15 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade(gradeBox.Text, wageBox.Text)]"/>
+                    </StackPanel>
+
+                </Grid>
+                <!--END Dialog window design-->
             </materialDesign:DialogHost.DialogContent>
 
             <Grid Background="#28324b">
@@ -37,31 +61,38 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <!--Start Grades and Subjects list design-->
                 <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding Subjects}" Grid.Column="0" Grid.Row="0" Foreground="White"  Margin="20 20 0 0">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
+                                    <!--Start Subjects list design-->
                                     <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                                         <TextBlock x:Name="txtSubject" Text="{Binding SubjectName}"/>
-                                        <Button Content="{materialDesign:PackIcon Plus}" 
+                                        <Button x:Name="ButtonToAddNewGrade" Content="{materialDesign:PackIcon Plus}" 
                                                 cal:Message.Attach="[Event Click] = [Action OpenDialog(txtSubject.Text)]"
                                                 ToolTip="Add new grade" BorderBrush="{x:Null}" Opacity="0.5" 
                                                 Foreground="#28324b" Background="#fff" Width="25" Height="25" Padding="0" Margin="15 0 0 0"/>
                                     </StackPanel>
+                                    <!--END Subjects list design-->
                                     <ItemsControl ItemsSource="{Binding Grades}">
 
+                                        <!--Start Grades list design-->
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel Orientation="Horizontal"  Margin="0 0 0 20"/>
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
+
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button Content="{Binding GradeValue}" MinWidth="50" MinHeight="50" 
-                                                    Margin="0 0 8 8" Background="#ffb525" Foreground="#28324b" FontSize="24"/>
+                                                <Button Content="{Binding GradeValue}" Width="50" Height="50" 
+                                                    Margin="0 0 8 8" Padding="0" Background="#ffb525" Foreground="#28324b" FontSize="22"
+                                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
+                                        <!--END Grades list design-->
 
                                     </ItemsControl>
                                 </StackPanel>
@@ -69,21 +100,23 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
+                <!--END Grades and Subjects list design-->
 
-                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0 0 0 20">
-                    <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                <!--Start Add and Remove Subject section design-->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0 0 30 30" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 0">
                         <Button x:Name="AddSubject" Content="Add subject" Width="150"
-                    Background="#ffb525" Foreground="#28324b"  Margin="0 0 0 10"
-                    cal:Message.Attach="[Event Click] = [Action AddSubject]" />
+                            Background="#ffb525" Foreground="#28324b"  Margin="0 0 0 10"
+                            cal:Message.Attach="[Event Click] = [Action AddSubject]" />
 
                         <TextBox x:Name="NewSubject" Background="White" Width="150" Padding="2" 
-                     Foreground="#28324b" FontSize="16"/>
+                            Foreground="#28324b" FontSize="16"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="20 0 0 0">
-                        <Button x:Name="RemoveSubject" Content="Remove subject" Width="150" Margin="0 0 0 10"
-                    Background="#ffb525" Foreground="#28324b"
-                    cal:Message.Attach="[Event Click] = [Action RemoveSubject]"/>
+                        <Button x:Name="RemoveSubject" Content="Remove subject" Width="150" 
+                            Background="#ffb525" Foreground="#28324b" Margin="0 0 0 10"
+                            cal:Message.Attach="[Event Click] = [Action RemoveSubject]"/>
 
                         <ComboBox x:Name="TrashSubject" ItemsSource="{Binding Subjects}" Cursor="Hand" SelectedIndex="{Binding SelectedItemToRemove}"
                               Width="150" Background="White" VerticalContentAlignment="Center" Padding="5">
@@ -95,7 +128,7 @@
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>
-
+                <!--END Add and Remove Subject section design-->
             </Grid>
 
         </materialDesign:DialogHost>
