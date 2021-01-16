@@ -27,14 +27,5 @@ namespace StudentAssistantApp.Views
         {
             InitializeComponent();
         }
-
-        private async void ButtonSave_Click(object sender, RoutedEventArgs e)
-        {
-            await DialogHost.Show(DialogSave.DialogContent, "IdDialogSave");
-        }
-        private async void ButtonOpen_Click(object sender, RoutedEventArgs e)
-        {
-            await DialogHost.Show(DialogOpen.DialogContent, "IdDialogOpen");
-        }
     }
 }
