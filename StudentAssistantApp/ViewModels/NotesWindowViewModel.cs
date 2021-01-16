@@ -19,7 +19,8 @@ namespace StudentAssistantApp.ViewModels
         private string noteName;
         private string noteContent;
         private bool isDialogOpen, isEditing;
-        private int itemIndex, itemCount = 0;
+        private bool isDialogSaveOpen;
+        private int noteIndex;
         public BindableCollection<NoteModel> Notes
         {
             get { return notes; }
@@ -52,6 +53,15 @@ namespace StudentAssistantApp.ViewModels
                 NotifyOfPropertyChange("IsDialogOpen");
             }
         }
+        public bool IsDialogSaveOpen
+        {
+            get { return isDialogSaveOpen; }
+            set
+            {
+                isDialogSaveOpen = value;
+                NotifyOfPropertyChange("IsDialogSaveOpen");
+            }
+        }
         public void CloseDialog()
         {
             IsDialogOpen = false;
@@ -59,12 +69,13 @@ namespace StudentAssistantApp.ViewModels
             //NoteContent = "";
             //NoteName = "";
         }
-
+        public void CloseSaveDialog()
+        {
+            IsDialogSaveOpen = false;
+            isEditing = false;
+        }
         public NotesWindowViewModel()
         {
-            //Notes.Add(new NoteModel { NoteName = "test1", NoteContent = "TEST1", NoteId = itemCount++ });
-            //Notes.Add(new NoteModel { NoteName = "test2", NoteContent = "TEST2", NoteId = itemCount++ });
-            //Notes.Add(new NoteModel { NoteName = "test3", NoteContent = "TEST3", NoteId = itemCount++ });
 
             //Pobranie notatek z bazy danych
             using (var context = new StudentAppContext())
@@ -79,45 +90,73 @@ namespace StudentAssistantApp.ViewModels
 
         public void SaveNote()
         {
+                //Dodanie notatki do bazy danych
+                int idIndex;
+                var dbnote = new DBNote { NoteHeadline = noteName, NoteText = noteContent };
+                using (var context = new StudentAppContext())
+                {
+                    context.DBNotes.Add(dbnote);
+                    context.SaveChanges();
+                    var obiekt = context.DBNotes.OrderByDescending(x => x.DBNoteId).FirstOrDefault();
+                    idIndex = obiekt.DBNoteId;
+                }
 
-            //Dodanie notatki do bazy danych
-            int idIndex;
-            var dbnote = new DBNote { NoteHeadline = noteName, NoteText = noteContent };
-            using (var context = new StudentAppContext())
-            {
-                context.DBNotes.Add(dbnote);
-                context.SaveChanges();
-                var obiekt = context.DBNotes.OrderByDescending(x => x.DBNoteId).FirstOrDefault();
-                idIndex = obiekt.DBNoteId;
-            }
-
-            Notes.Add(new NoteModel { NoteName = noteName, NoteContent = noteContent, NoteId = idIndex });
+                Notes.Add(new NoteModel { NoteName = noteName, NoteContent = noteContent, NoteId = idIndex });
 
             NoteName = "";
             NoteContent = "";
-            IsDialogOpen = false;
+            IsDialogSaveOpen = false;
             isEditing = false;
         }
 
         public void LoadNote(int index)
         {
 
-            NoteName = Notes[index].NoteName;
-            NoteContent = Notes[index].NoteContent;
+            //NoteName = Notes[index].NoteName;
+            //NoteContent = Notes[index].NoteContent;
 
-            /*DBNote note1; 
-            using(var context = new StudentAppContext())
+            using (var context = new StudentAppContext())
             {
-                note1 = context.DBNotes.Where(x => x.DBNoteId == index).FirstOrDefault();
-                note1.NoteHeadline = noteName;
-                note1.NoteText = NoteContent;
+                DBNote DBNote = context.DBNotes.Where(x => x.DBNoteId == index + 1).FirstOrDefault();
+                NoteName = DBNote.NoteHeadline;
+                NoteContent = DBNote.NoteText;
 
-                context.SaveChanges();
-            }*/
+                //context.SaveChanges();
+            }
+
+            isEditing = true;
+            noteIndex = index;
             IsDialogOpen = false;
         }
 
+        public void SaveNotes()
+        {
+            if (isEditing)
+            {
+                using (var context = new StudentAppContext())
+                {
+                    DBNote DBNote = context.DBNotes.Where(x => x.DBNoteId == noteIndex + 1).FirstOrDefault(); //Do poprawy idIndex
+                    DBNote.NoteHeadline = NoteName;
+                    DBNote.NoteText = NoteContent;
 
+                    context.SaveChanges();
+                }
 
+                NoteName = "";
+                NoteContent = "";
+                isEditing = false;
+            }
+            else
+            {
+                IsDialogSaveOpen = true;
+            }
+            //await DialogHost.Show(DialogSave.DialogContent, "IdDialogSave");
+        }
+
+        public void OpenNotes()
+        {
+            IsDialogOpen = true;
+            //await DialogHost.Show(DialogOpen.DialogContent, "IdDialogOpen");
+        }
     }
 }

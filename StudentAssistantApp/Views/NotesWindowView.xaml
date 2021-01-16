@@ -14,7 +14,7 @@
     <Grid Background="White">
 
 
-            <materialDesign:DialogHost x:Name="DialogOpen" Identifier="IdDialogOpen" IsOpen="{Binding IsDialogOpen}">
+            <materialDesign:DialogHost x:Name="DialogOpen" IsOpen="{Binding IsDialogOpen}">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Height="350"  Width="350" Background="#28324b">
                         <Label Content="Open" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/>
@@ -69,19 +69,19 @@
 
                     <Button HorizontalAlignment="Right" Content="Save" Margin="15 0"
                         Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
-                        Click="ButtonOpen_Click"
+                        cal:Message.Attach="[Event Click] = [Action SaveNotes]"
                         Width="120"/>
 
                     <Button HorizontalAlignment="Right" Content="Open" Margin="15 0"
                         Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
-                        Click="ButtonSave_Click"
+                        cal:Message.Attach="[Event Click] = [Action OpenNotes]"
                         Width="120"/>
 
                 </StackPanel>
             </Grid>
         </materialDesign:DialogHost>
 
-            <materialDesign:DialogHost x:Name="DialogSave" Identifier="IdDialogSave" IsOpen="{Binding IsDialogOpen}">
+            <materialDesign:DialogHost x:Name="DialogSave" IsOpen="{Binding IsDialogSaveOpen}">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Height="350"  Width="350" Background="#28324b">
                         <Label Content="Save" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/>
@@ -96,7 +96,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                             <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
-                                cal:Message.Attach="[Event Click] = [Action CloseDialog]"/>
+                                cal:Message.Attach="[Event Click] = [Action CloseSaveDialog]"/>
                             <Button Content="Accept" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action SaveNote]"/>
                         </StackPanel>
