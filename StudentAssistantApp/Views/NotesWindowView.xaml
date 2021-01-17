@@ -17,9 +17,9 @@
             <materialDesign:DialogHost x:Name="DialogOpen" IsOpen="{Binding IsDialogOpen}">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Height="350"  Width="350" Background="#28324b">
-                        <Label Content="Open" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/>
-                        <ScrollViewer Margin="50 80">
-                            <ListBox x:Name="ListBoxOpen" ItemsSource="{Binding Notes}" SelectedItem="{Binding SelectedItem}" SelectionMode="Extended" Margin="3 0">
+                    <Label Content="Open" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#fff"/> 
+                    <ScrollViewer Margin="50 80">
+                            <ListBox x:Name="ListBoxOpen" ItemsSource="{Binding Notes}" Margin="3 0"> <!--SelectedItem="{Binding SelectedItem}" SelectionMode="Extended"-->
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                                         <Style.Triggers>
@@ -82,7 +82,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="0 15">
                     <Button HorizontalAlignment="Right" Content="Delete" Margin="15 0"
                         Foreground="White" Background="#e41e1e" BorderBrush="#e41e1e"
-                        cal:Message.Attach="[Event Click] = [Action DeleteNote]"
+                        cal:Message.Attach="[Event Click] = [Action DeleteNote]" IsEnabled="{Binding IsEditing}"
                         Width="120"/>
                 </StackPanel>
 
