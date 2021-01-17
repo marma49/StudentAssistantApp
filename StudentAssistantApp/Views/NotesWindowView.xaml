@@ -78,6 +78,14 @@
                         Width="120"/>
 
                 </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="0 15">
+                    <Button HorizontalAlignment="Right" Content="Delete" Margin="15 0"
+                        Foreground="White" Background="#e41e1e" BorderBrush="#e41e1e"
+                        cal:Message.Attach="[Event Click] = [Action DeleteNote]"
+                        Width="120"/>
+                </StackPanel>
+
             </Grid>
         </materialDesign:DialogHost>
 
