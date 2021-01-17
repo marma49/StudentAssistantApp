@@ -79,7 +79,6 @@ namespace StudentAssistantApp.ViewModels
                 NotifyOfPropertyChange("NoteIndex");
             }
         }
-
         public void CloseDialog()
         {
             IsDialogOpen = false;
@@ -138,7 +137,6 @@ namespace StudentAssistantApp.ViewModels
 
                 //context.SaveChanges();
             }
-
             IsEditing = true;
             NoteIndex = DBNote.DBNoteId;
             IsDialogOpen = false;
@@ -175,11 +173,6 @@ namespace StudentAssistantApp.ViewModels
         public void OpenNotes()
         {
             IsDialogOpen = true;
-        }
-
-        public bool CanDeleteNote()
-        {
-            return IsEditing;
         }
 
         public void DeleteNote()
