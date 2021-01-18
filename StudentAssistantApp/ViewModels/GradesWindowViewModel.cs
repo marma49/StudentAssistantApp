@@ -286,9 +286,19 @@ namespace StudentAssistantApp.ViewModels
             chosenSubject = Subjects.First(n => n.SubjectName == subjectName);
 
         }
+    
+        public void EditGrade(object sender)
+        {
+            System.Windows.MessageBox.Show("I Edit grade");
+        }
+
+        public void DeleteGrade(object sender)
+        {
+            System.Windows.MessageBox.Show("I Delete grade");
+        }
+
+
     }
-
-
 }
 
 
