@@ -63,7 +63,7 @@
 
                 <!--Start Grades and Subjects list design-->
                 <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding Subjects}" Grid.Column="0" Grid.Row="0" Foreground="White"  Margin="20 20 0 0">
+                    <ItemsControl x:Name="GridLayout" ItemsSource="{Binding Subjects}" Grid.Column="0" Grid.Row="0" Foreground="White"  Margin="20 20 0 0">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -86,10 +86,24 @@
                                         </ItemsControl.ItemsPanel>
 
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Content="{Binding GradeValue}" Width="50" Height="50" 
-                                                    Margin="0 0 8 8" Padding="0" Background="#ffb525" Foreground="#28324b" FontSize="22"
-                                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+                                            <DataTemplate><!--Content="{Binding GradeValue}"-->
+                                                <Button Width="50" Height="50" 
+                                                    Margin="0 0 8 8" Padding="0" Background="#ffb525" Foreground="#28324b" FontSize="22">
+                                                    <materialDesign:PopupBox
+                                                    PlacementMode="BottomAndAlignLeftEdges" Foreground="Black">
+                                                        <materialDesign:PopupBox.ToggleContent>
+                                                            <TextBlock Text="{Binding GradeValue}" Padding="12"
+                                                                       Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
+                                                        </materialDesign:PopupBox.ToggleContent>
+                                                        <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" FontSize="15">
+                                                            <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=gbTask}" 
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source)]" />
+                                                            <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=gbTask}"
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action DeleteGrade($source)]"/>
+                                                        </ListBox>
+                                                    </materialDesign:PopupBox>
+                                                </Button>
+                                                <!--Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"-->
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                         <!--END Grades list design-->
