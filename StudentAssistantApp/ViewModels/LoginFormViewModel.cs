@@ -15,12 +15,17 @@ namespace StudentAssistantApp.ViewModels
         IWindowManager manager = new WindowManager();
 
         public SecureString SecurePassword { private get; set; }
+        public SecureString NewSecurePassword1 { private get; set; }
+        public SecureString NewSecurePassword2 { private get; set; }
 
-
+        public string test_haslo;
 
         private string username;
         private string password;
         private bool isDialogOpen;
+        private string newUser;
+        private string newPassword1;
+        private string newPassword2;
 
         public string CreatePasswordHash(string haslo)
         {
@@ -63,16 +68,35 @@ namespace StudentAssistantApp.ViewModels
                 NotifyOfPropertyChange("IsDialogOpen");
             }
         }
-
-        public string Username
+        public string NewUser
         {
-            get { return username; }
+            get { return newUser; }
             set
             {
-                username = value;
-                NotifyOfPropertyChange("Username");
+                newUser = value;
+                NotifyOfPropertyChange("NewUser");
             }
         }
+
+        public string NewPassword1
+        {
+            get { return SecureStringToString(NewSecurePassword1); }
+            set
+            {
+                newPassword1 = value;
+                NotifyOfPropertyChange("NewPassword1");
+            }
+        }
+        public string NewPassword2
+        {
+            get { return SecureStringToString(NewSecurePassword2); }
+            set
+            {
+                newPassword2 = value;
+                NotifyOfPropertyChange("NewPassword2");
+            }
+        }
+
         public string Password
         {
             get { return SecureStringToString(SecurePassword); }
@@ -98,9 +122,8 @@ namespace StudentAssistantApp.ViewModels
         public void LogIn()
         {
 
-
             //hasło - savedPasswordHash wczytane z bazy na podstawie nazwy użytkownika/
-            byte[] hashBytes = Convert.FromBase64String(CreatePasswordHash("1234"));
+            byte[] hashBytes = Convert.FromBase64String(test_haslo);
             byte[] salt = new byte[16];
 
             Array.Copy(hashBytes, 0, salt, 0, 16);
@@ -145,13 +168,19 @@ namespace StudentAssistantApp.ViewModels
             //Array.Copy(salt, 0, hashBytes, 0, 16);
             //Array.Copy(hash, 0, hashBytes, 16, 20);
 
-            IsDialogOpen = false;
+            if (NewPassword1.Equals(NewPassword2))
+            {
+                test_haslo = CreatePasswordHash(NewPassword1);
+                IsDialogOpen = false;
+            }
+            else
+            {
 
-            //TryCloseAsync();
+            }
 
-            //string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            
 
-            //trzeba zapisać tablice salt oraz savedPasswordHash do bazy
+            //trzeba zapisać savedPasswordHash do bazy
         }
     }
 }
