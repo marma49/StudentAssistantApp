@@ -154,7 +154,19 @@ namespace StudentAssistantApp.ViewModels
         {
             IsDialogOpen = false;
             await Task.Delay(200);
+          
             Events.Remove(eventModel);
+
+            //Usunięcie zdarzenia z bazy danych
+            int eventId = eventModel.EventId;
+            using (var context = new StudentAppContext())
+            {
+                DBEvent dbe = context.DBEvents.FirstOrDefault(x => x.DBEventId == eventId);
+
+                context.DBEvents.Remove(dbe);
+
+                context.SaveChanges();
+            }
         }
 
         public void HideFullEvent()

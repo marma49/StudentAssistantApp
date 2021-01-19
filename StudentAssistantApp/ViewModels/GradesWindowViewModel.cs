@@ -19,8 +19,10 @@ namespace StudentAssistantApp.ViewModels
         private string helperTextGrade = "";
         private SubjectModel chosenSubject;
         private bool isDialogOpen = false;
-        private string grade = "";
-        private string wage = "";
+        private bool isEditing = false;
+        private int gradeIndex;
+        private string grade = "0";
+        private string wage = "0";
         private double minGrade = 1;
         private double maxGrade = 100;
         private double minWage = 0;
@@ -30,36 +32,41 @@ namespace StudentAssistantApp.ViewModels
 
         public GradesWindowViewModel()
         {
+            //Pobranie i wyświetlenie przedmiotów i ocen z BD
             using (var context = new StudentAppContext())
             {
-                //Pobranie i wyświetlenie przedmiotow i ocen
-                var dbsubjects = context.DBSubjects.ToList();
-                var dbmarks = context.DBMarks.ToList();
-                foreach (DBSubject s1 in dbsubjects)
+                var subjects = context.DBSubjects.ToList();
+                foreach (DBSubject dbs in subjects)
                 {
-                    var lista = dbmarks.Where(x => x.Subject == s1.SubjectName).ToList();
-                    BindableCollection<GradeModel> gm1 = new BindableCollection<GradeModel>();
-                    foreach (DBMark mark1 in lista)
+                    BindableCollection<GradeModel> gm = new BindableCollection<GradeModel>();
+                    if (dbs.Marks != null)
                     {
-                        gm1.Add(new GradeModel { Date = mark1.Date, GradeValue = mark1.Mark });
+                        var dbmarks = context.DBMarks.ToList().Where(x => x.DBSubject == dbs);
+                        foreach (DBMark mark in dbmarks)
+                        {
+                            gm.Add(new GradeModel
+                            {
+                                GradeId = mark.DBMarkId,
+                                Date = mark.Date,
+                                GradeValue = mark.Mark
+                            });
+                        }
                     }
-
                     Subjects.Add(new SubjectModel
                     {
-                        SubjectName = s1.SubjectName,
-                        Grades = gm1
+                        SubjectName = dbs.SubjectName,
+                        Grades = gm
                     });
-
                 }
-
-                //Dodawanie typów ocen do TypesOfGrades
-                TypesOfGrades.Add("sprawdzian");
-                TypesOfGrades.Add("kartkówka");
-                TypesOfGrades.Add("odpowiedź ustna");
-                TypesOfGrades.Add("zadanie");
-                TypesOfGrades.Add("aktywność");
-                TypesOfGrades.Add("inne");
             }
+
+            TypesOfGrades.Add("sprawdzian");
+            TypesOfGrades.Add("kartkówka");
+            TypesOfGrades.Add("odpowiedź ustna");
+            TypesOfGrades.Add("zadanie");
+            TypesOfGrades.Add("aktywność");
+            TypesOfGrades.Add("inne");
+
             Subjects.Add(new SubjectModel
             {
                 SubjectName = "Fizyka",
@@ -104,8 +111,8 @@ namespace StudentAssistantApp.ViewModels
             set
             {
                 isDialogOpen = value;
-                Grade = "";
-                Wage = "";
+                Grade = "0";
+                Wage = "0";
                 NotifyOfPropertyChange("IsDialogOpen");
             }
         }
@@ -243,21 +250,75 @@ namespace StudentAssistantApp.ViewModels
         {
             if (SelectedItemToRemove != -1)
             {
-                Subjects.RemoveAt(SelectedItemToRemove);
+                var subject = Subjects.ElementAt(SelectedItemToRemove); // pobieram przedmiot do usunięcia
+                Subjects.Remove(subject);
+
+                //Usunięcie przedmiotu i jego ocen z bazy
+                using (var context = new StudentAppContext())
+                {
+                    DBSubject dbsubject = context.DBSubjects.FirstOrDefault(x => x.SubjectName == subject.SubjectName);
+                    var dbmarks = context.DBMarks.ToList().Where(x => x.DBSubject == dbsubject);
+
+                    context.RemoveRange(dbmarks);
+                    context.SaveChanges();
+
+                    context.DBSubjects.Remove(dbsubject);
+                    context.SaveChanges();
+                }
             }
         }
 
         public void AddNewGrade(string grade, string wage)
         {
-            //Dodanie oceny do bazy danych
-            var dbmark = new DBMark { Mark = int.Parse(Grade), Date = DateTime.Now, Subject = newSubject }; // Error przy dodawaniu liczb z przecinkiem, mark by trzeba było na double zamienić. Z kropką liczb też na razie nie można dodać
-            using (var context = new StudentAppContext())
+            if (!isEditing)
             {
-                context.DBMarks.Add(dbmark);
+                //Dodanie oceny do bazy danych
+                int itemId;
+                using (var context = new StudentAppContext())
+                {
+                    DBSubject dbs = context.DBSubjects.FirstOrDefault(x => x.SubjectName == chosenSubject.SubjectName);
+                    DBMark dbmark = new DBMark(); //{ Mark = int.Parse(Grade), Date = DateTime.Now, DBSubject = dbs};
+                    dbmark.Mark = double.Parse(Grade);
+                    dbmark.Date = DateTime.Now;
+                    dbmark.DBSubject = dbs;
+                    dbmark.Subject = chosenSubject.SubjectName;
+                    dbs.Marks.Add(dbmark);
+                    //context.Entry(dbs).State = EntityState.Modified;
+                    context.SaveChanges();
 
-                context.SaveChanges();
+                    var ostatniObiekt = context.DBMarks.OrderByDescending(x => x.DBMarkId).FirstOrDefault();
+                    itemId = ostatniObiekt.DBMarkId;
+                }
+                chosenSubject.Grades.Add(new GradeModel { GradeId = itemId, Date = DateTime.Now, GradeValue = Convert.ToDouble(Grade), Wage = Convert.ToDouble(Wage), Type = SelectedType });
             }
-            chosenSubject.Grades.Add(new GradeModel { Date = DateTime.Now, GradeValue = Convert.ToDouble(Grade), Wage = Convert.ToDouble(Wage), Type = SelectedType });
+            else
+            {               
+                var listaPrzedmiotow = Subjects.ToList();
+                foreach (SubjectModel przedmiot in listaPrzedmiotow)
+                {
+                    var oceny = przedmiot.Grades.ToList();
+                    foreach (GradeModel ocena in oceny)
+                    {
+                        if (gradeIndex == ocena.GradeId)
+                        {
+                            ocena.GradeValue = double.Parse(grade);
+                            ocena.Wage = double.Parse(wage);
+                            Subjects.Refresh();
+                        }
+                    }
+                }
+
+                //Edycja oceny w bazie danych
+                using (var context = new StudentAppContext())
+                {
+                    DBMark dbm = context.DBMarks.FirstOrDefault(x => x.DBMarkId == gradeIndex);
+                    dbm.Mark = double.Parse(grade);
+                    context.SaveChanges();
+                }
+
+                    isEditing = false;
+            }
+            
             Grade = "";
             Wage = "";
             selectedType = "inne";
@@ -286,15 +347,48 @@ namespace StudentAssistantApp.ViewModels
             chosenSubject = Subjects.First(n => n.SubjectName == subjectName);
 
         }
+
+        
     
-        public void EditGrade(object sender)
+        public void EditGrade(object sender, string subjectName)
         {
-            System.Windows.MessageBox.Show("I Edit grade");
+            IsDialogOpen = true;
+
+            var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //get sender
+            gradeIndex = int.Parse(listBoxItem.Tag.ToString());
+
+            isEditing = true;
         }
 
         public void DeleteGrade(object sender)
         {
-            System.Windows.MessageBox.Show("I Delete grade");
+            var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //get sender
+            gradeIndex = int.Parse(listBoxItem.Tag.ToString());
+
+            var listaPrzedmiotow = Subjects.ToList();
+            foreach (SubjectModel przedmiot in listaPrzedmiotow)
+            {
+                var oceny = przedmiot.Grades.ToList();
+                foreach (GradeModel ocena in oceny)
+                {
+                    if (gradeIndex == ocena.GradeId)
+                    {
+                        przedmiot.Grades.Remove(ocena);
+                    }
+
+
+                }
+            }
+
+            //Usunięcie oceny z bazy
+            using(var context = new StudentAppContext())
+            {
+                DBMark dbm = context.DBMarks.FirstOrDefault(x => x.DBMarkId == gradeIndex);
+
+                context.DBMarks.Remove(dbm);
+
+                context.SaveChanges();
+            }
         }
 
 

@@ -175,9 +175,24 @@ namespace StudentAssistantApp.ViewModels
             IsDialogOpen = true;
         }
 
-        public void DeleteNote()
+        public void DeleteNote(object sender)
         {
+            //var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //get sender
+            //noteIndex = int.Parse(listBoxItem.Tag.ToString());
 
+            
+            //Usunięcie notatki z bazy
+            using(var context = new StudentAppContext())
+            {
+                DBNote dbnote = context.DBNotes.FirstOrDefault(x => x.DBNoteId == noteIndex); // noteIndex zmienna wskazująca id wybranej notatki
+
+                context.DBNotes.Remove(dbnote);
+                context.SaveChanges();
+            }
+
+
+            NoteModel nm = Notes.FirstOrDefault(x => x.NoteId == noteIndex);
+            Notes.Remove(nm);
         }
     }
 }

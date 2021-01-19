@@ -10,8 +10,8 @@ using StudentAssistantApp.Models;
 namespace StudentAssistantApp.Migrations
 {
     [DbContext(typeof(StudentAppContext))]
-    [Migration("20201221113820_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210119155802_19.01_doubleMark")]
+    partial class _1901_doubleMark
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,17 +34,14 @@ namespace StudentAssistantApp.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Mark")
-                        .HasColumnType("int");
+                    b.Property<double>("Mark")
+                        .HasColumnType("float");
 
                     b.Property<int>("Semester")
                         .HasColumnType("int");
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
 
                     b.HasKey("DBMarkId");
 
