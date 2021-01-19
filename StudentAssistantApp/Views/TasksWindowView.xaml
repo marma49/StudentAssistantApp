@@ -19,7 +19,6 @@
                     <StackPanel Margin="50 80">
                         <TextBox x:Name="TaskName" Padding="0 2" Text="{Binding TaskName}"
                               materialDesign:HintAssist.Hint="Nazwa zadania"
-                              materialDesign:HintAssist.HelperText="Max 20 symbols"
                                  Foreground="#28324b" CaretBrush="#28324b"
                                  materialDesign:HintAssist.Foreground="#28324b"
                                  materialDesign:TextFieldAssist.UnderlineBrush="#28324b"

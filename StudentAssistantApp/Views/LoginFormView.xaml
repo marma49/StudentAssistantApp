@@ -17,6 +17,11 @@
         >
     <Border Background="#28324b" CornerRadius="15">
         <Grid>
+            <materialDesign:DialogHost IsOpen="{Binding IsDialogProgressOpen}">
+                <materialDesign:DialogHost.DialogContent>
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="35" IsIndeterminate="True" Width="30" Height="30"/>
+                </materialDesign:DialogHost.DialogContent>
+            </materialDesign:DialogHost>
             <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Height="550" Width="340" Background="#28324b">

@@ -86,12 +86,6 @@
                                 <TextBlock Text="Kalendarz" VerticalAlignment="Center" Margin="5"/>
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="ItemOptions" Height="80" cal:Message.Attach="[Event GotFocus] = [Action LoadOptions]">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" Margin="10"/>
-                                <TextBlock Text="Ustawienia" VerticalAlignment="Center" Margin="5"/>
-                            </StackPanel>
-                        </ListViewItem>
                         <ListViewItem x:Name="ItemLogOut" Height="80" cal:Message.Attach="[Event MouseUp] = [Action LogOut]">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Login" Height="30" Width="30" Margin="10"/>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentAssistantApp.ViewModels
 {
@@ -66,15 +67,6 @@ namespace StudentAssistantApp.ViewModels
             TypesOfGrades.Add("zadanie");
             TypesOfGrades.Add("aktywność");
             TypesOfGrades.Add("inne");
-
-            Subjects.Add(new SubjectModel
-            {
-                SubjectName = "Fizyka",
-                Grades = new BindableCollection<GradeModel>() {
-                new GradeModel { Date = DateTime.Now, GradeValue = 5},
-                new GradeModel { Date = DateTime.Now, GradeValue = 2},
-            }
-            });
         }
 
         public BindableCollection<SubjectModel> Subjects
@@ -350,7 +342,7 @@ namespace StudentAssistantApp.ViewModels
 
 
 
-        public void EditGrade(object sender, string subjectName)
+        public void EditGrade(object sender)
         {
             IsDialogOpen = true;
 
@@ -360,7 +352,7 @@ namespace StudentAssistantApp.ViewModels
             isEditing = true;
         }
 
-        public void DeleteGrade(object sender)
+        public async Task DeleteGradeAscync(object sender)
         {
             var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //get sender
             gradeIndex = int.Parse(listBoxItem.Tag.ToString());
@@ -373,6 +365,7 @@ namespace StudentAssistantApp.ViewModels
                 {
                     if (gradeIndex == ocena.GradeId)
                     {
+                        await Task.Delay(200);
                         przedmiot.Grades.Remove(ocena);
                     }
 

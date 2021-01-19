@@ -98,9 +98,9 @@
                                                         </materialDesign:PopupBox.ToggleContent>
                                                         <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" FontSize="15">
                                                             <ListBoxItem Content="Edytuj" Tag="{Binding Path=Tag, ElementName=btnGrade}" 
-                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source, txtSubject.Text)]" />
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source)]" />
                                                             <ListBoxItem Content="Usuń" Tag="{Binding Path=Tag, ElementName=btnGrade}"
-                                                                     cal:Message.Attach="[Event MouseUp] = [Action DeleteGrade($source)]"/>
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action DeleteGradeAscync($source)]"/>
                                                         </ListBox>
                                                     </materialDesign:PopupBox>
                                                 </Button>

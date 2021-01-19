@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Security;
 using System.Runtime.InteropServices;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentAssistantApp.ViewModels
 {
@@ -22,12 +23,14 @@ namespace StudentAssistantApp.ViewModels
 
         public string test_haslo;
 
-        private string username;
+        private string username = "";
         private string password;
         private bool isDialogOpen;
         private string newUser;
         private string newPassword1;
         private string newPassword2;
+        private bool isDialogProgressOpen;
+
 
         public string CreatePasswordHash(string haslo)
         {
@@ -59,6 +62,11 @@ namespace StudentAssistantApp.ViewModels
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
+        }
+        public bool IsDialogProgressOpen
+        {
+            get { return isDialogProgressOpen; }
+            set { isDialogProgressOpen = value; NotifyOfPropertyChange("IsDialogProgressOpen"); }
         }
 
         public bool IsDialogOpen
@@ -130,9 +138,11 @@ namespace StudentAssistantApp.ViewModels
         {
             TryCloseAsync();
         }
-
-        public void LogIn()
+        public async Task LogIn()
         {
+            int ok = 1;
+            IsDialogProgressOpen = true;
+            await Task.Run(() => { 
             if (!String.IsNullOrEmpty(Username) && (!String.IsNullOrEmpty(Password)))
             {
                 using (var context = new StudentAppContext())
@@ -162,7 +172,7 @@ namespace StudentAssistantApp.ViewModels
 
                     byte[] hash = pbkdf2.GetBytes(20);
 
-                    int ok = 1;
+
                     for (int i = 0; i < 20; i++)
                     {
                         if (hashBytes[i + 16] != hash[i])
@@ -170,18 +180,19 @@ namespace StudentAssistantApp.ViewModels
                             ok = 0;
                         }
                     }
-
-                    if (ok == 1)
-                    {
-                        manager.ShowWindowAsync(new MainWindowViewModel());
-                        TryCloseAsync();
-                    }
-                    else
-                    {
-                        Password = "";
-                    }
                 }
             }
+            });
+            if (ok == 1)
+            {
+                await manager.ShowWindowAsync(new MainWindowViewModel());
+                await TryCloseAsync();
+            }
+            else
+            {
+                Password = "";
+            }
+            IsDialogProgressOpen = false;
         }
 
 
