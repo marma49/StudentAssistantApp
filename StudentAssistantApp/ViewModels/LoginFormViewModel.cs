@@ -1,10 +1,12 @@
 using Caliburn.Micro;
+using StudentAssistantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using System.Security;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace StudentAssistantApp.ViewModels
 {
@@ -68,6 +70,16 @@ namespace StudentAssistantApp.ViewModels
                 NotifyOfPropertyChange("IsDialogOpen");
             }
         }
+        public string Username
+        {
+            get { return username; }
+            set
+            {
+                username = value;
+                NotifyOfPropertyChange("Username");
+            }
+        }
+
         public string NewUser
         {
             get { return newUser; }
@@ -121,34 +133,54 @@ namespace StudentAssistantApp.ViewModels
 
         public void LogIn()
         {
-
-            //hasło - savedPasswordHash wczytane z bazy na podstawie nazwy użytkownika/
-            byte[] hashBytes = Convert.FromBase64String(test_haslo);
-            byte[] salt = new byte[16];
-
-            Array.Copy(hashBytes, 0, salt, 0, 16);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(Password, salt, 10000);
-
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            int ok = 1;
-            for (int i = 0; i < 20; i++)
+            if (!String.IsNullOrEmpty(Username) && (!String.IsNullOrEmpty(Password)))
             {
-                if (hashBytes[i + 16] != hash[i])
+                using (var context = new StudentAppContext())
                 {
-                    ok = 0;
-                }
-            }
+                    var users = context.DBUsers.ToList();
+                    int flaga = 0;
 
-            if (ok == 1)
-            {
-                manager.ShowWindowAsync(new MainWindowViewModel());
-                TryCloseAsync();
-            }
-            else
-            {
-                Password = "";
+                    for (int i = 0; i < users.Count; i++)
+                    {
+                        if (Username.Equals(users[i].Login))
+                        {
+                            flaga = i;
+                            break;
+                        }
+                    }
+
+                    //return context.DBTasks.ToList();
+
+
+                    //hasło - savedPasswordHash wczytane z bazy na podstawie nazwy użytkownika/
+                    byte[] hashBytes = Convert.FromBase64String(users[flaga].Password);
+                    byte[] salt = new byte[16];
+
+                    Array.Copy(hashBytes, 0, salt, 0, 16);
+
+                    var pbkdf2 = new Rfc2898DeriveBytes(Password, salt, 10000);
+
+                    byte[] hash = pbkdf2.GetBytes(20);
+
+                    int ok = 1;
+                    for (int i = 0; i < 20; i++)
+                    {
+                        if (hashBytes[i + 16] != hash[i])
+                        {
+                            ok = 0;
+                        }
+                    }
+
+                    if (ok == 1)
+                    {
+                        manager.ShowWindowAsync(new MainWindowViewModel());
+                        TryCloseAsync();
+                    }
+                    else
+                    {
+                        Password = "";
+                    }
+                }
             }
         }
 
@@ -168,18 +200,44 @@ namespace StudentAssistantApp.ViewModels
             //Array.Copy(salt, 0, hashBytes, 0, 16);
             //Array.Copy(hash, 0, hashBytes, 16, 20);
 
-            if (NewPassword1.Equals(NewPassword2))
-            {
-                test_haslo = CreatePasswordHash(NewPassword1);
-                IsDialogOpen = false;
-            }
-            else
+
+
+            if (!String.IsNullOrEmpty(NewUser))
             {
 
+                bool flaga = false;
+                using (var context = new StudentAppContext())
+                {
+                    var users = context.DBUsers.ToList();
+
+                    for (int i = 0; i < users.Count; i++)
+                    {
+                        if (NewUser.Equals(users[i].Login))
+                        {
+                            flaga = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (NewPassword1.Equals(NewPassword2) && flaga == false)
+                {
+                    //test_haslo = CreatePasswordHash(NewPassword1);
+
+                    var dbuser = new DBUser { Login = newUser, Password = CreatePasswordHash(NewPassword1) };
+
+                    int userId;
+                    using (var context = new StudentAppContext())
+                    {
+                        context.DBUsers.Add(dbuser);
+                        context.SaveChanges();
+                        var obiektChwilowy = context.DBUsers.OrderByDescending(x => x.DBUserId).FirstOrDefault();
+                        userId = obiektChwilowy.DBUserId;
+                    }
+                    IsDialogOpen = false;
+                }
+
             }
-
-            
-
             //trzeba zapisać savedPasswordHash do bazy
         }
     }
