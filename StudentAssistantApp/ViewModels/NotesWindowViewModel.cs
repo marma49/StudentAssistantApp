@@ -83,8 +83,6 @@ namespace StudentAssistantApp.ViewModels
         {
             IsDialogOpen = false;
             IsEditing = false;
-            //NoteContent = "";
-            //NoteName = "";
         }
         public void CloseSaveDialog()
         {
@@ -162,12 +160,12 @@ namespace StudentAssistantApp.ViewModels
 
                 NoteName = "";
                 NoteContent = "";
-                //IsEditing = false;
             }
             else
             {
                 IsDialogSaveOpen = true;
             }
+            IsEditing = false;
         }
 
         public void OpenNotes()
@@ -175,12 +173,8 @@ namespace StudentAssistantApp.ViewModels
             IsDialogOpen = true;
         }
 
-        public void DeleteNote(object sender)
+        public void DeleteNote()
         {
-            //var listBoxItem = sender as System.Windows.Controls.ListBoxItem; //get sender
-            //noteIndex = int.Parse(listBoxItem.Tag.ToString());
-
-
             //Usunięcie notatki z bazy
             using (var context = new StudentAppContext())
             {
@@ -193,6 +187,10 @@ namespace StudentAssistantApp.ViewModels
 
             NoteModel nm = Notes.FirstOrDefault(x => x.NoteId == noteIndex);
             Notes.Remove(nm);
+
+            IsEditing = false;
+            NoteContent = "";
+            NoteName = "";
         }
     }
 }
