@@ -129,7 +129,7 @@ namespace StudentAssistantApp.ViewModels
                 {
                     if (Convert.ToDouble(value) < minGrade || Convert.ToDouble(value) > maxGrade)
                     {
-                        HelperTextGrade = $"Put value from interval {minGrade} - {maxGrade}";
+                        HelperTextGrade = $"Wpisz liczbę z zakresu {minGrade} - {maxGrade}";
                         NotifyOfPropertyChange("HelperTextGrade");
                     }
                     else
@@ -139,7 +139,7 @@ namespace StudentAssistantApp.ViewModels
                 }
                 catch
                 {
-                    HelperTextGrade = $"Put value from interval {minGrade} - {maxGrade}";
+                    HelperTextGrade = $"Wpisz liczbę z zakresu {minGrade} - {maxGrade}";
                 }
 
                 grade = value;
@@ -292,7 +292,7 @@ namespace StudentAssistantApp.ViewModels
                 chosenSubject.Grades.Add(new GradeModel { GradeId = itemId, Date = DateTime.Now, GradeValue = Convert.ToDouble(Grade), Wage = Convert.ToDouble(Wage), Type = SelectedType });
             }
             else
-            {               
+            {
                 var listaPrzedmiotow = Subjects.ToList();
                 foreach (SubjectModel przedmiot in listaPrzedmiotow)
                 {
@@ -316,9 +316,9 @@ namespace StudentAssistantApp.ViewModels
                     context.SaveChanges();
                 }
 
-                    isEditing = false;
+                isEditing = false;
             }
-            
+
             Grade = "";
             Wage = "";
             selectedType = "inne";
@@ -348,8 +348,8 @@ namespace StudentAssistantApp.ViewModels
 
         }
 
-        
-    
+
+
         public void EditGrade(object sender, string subjectName)
         {
             IsDialogOpen = true;
@@ -381,7 +381,7 @@ namespace StudentAssistantApp.ViewModels
             }
 
             //Usunięcie oceny z bazy
-            using(var context = new StudentAppContext())
+            using (var context = new StudentAppContext())
             {
                 DBMark dbm = context.DBMarks.FirstOrDefault(x => x.DBMarkId == gradeIndex);
 

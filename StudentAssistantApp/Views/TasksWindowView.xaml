@@ -18,7 +18,7 @@
                     <Label Content="Nowe zadanie" Margin= "0 30 0 0" FontSize="15" HorizontalAlignment="Center" Foreground="#28324b"/>
                     <StackPanel Margin="50 80">
                         <TextBox x:Name="TaskName" Padding="0 2" Text="{Binding TaskName}"
-                              materialDesign:HintAssist.Hint="Task name"
+                              materialDesign:HintAssist.Hint="Nazwa zadania"
                               materialDesign:HintAssist.HelperText="Max 20 symbols"
                                  Foreground="#28324b" CaretBrush="#28324b"
                                  materialDesign:HintAssist.Foreground="#28324b"
@@ -29,16 +29,16 @@
                                  TextWrapping="Wrap"
                                  Height="80"
                                  Margin="0 50 0 0"
-                                 materialDesign:HintAssist.Hint="This is a text area" 
+                                 materialDesign:HintAssist.Hint="To jest pole tekstowe" 
                                  Foreground="#28324b" CaretBrush="#28324b"
                                  materialDesign:HintAssist.Foreground="#28324b"
                                  materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
                                  BorderBrush="#28324b"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        <Button Content="Zamknij" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action CloseDialog]"/>
-                        <Button Content="Accept" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        <Button Content="Akceptuj" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action AddNewTask]"/>
                     </StackPanel>
                 </Grid>
@@ -85,7 +85,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
-                                                
+
                                                 <!--GroupBox Header Text-->
                                                 <TextBlock Grid.Column="0" Text="{Binding Path=Header, ElementName=gbTask}"/>
                                                 <!--END GroupBox Header Text-->
@@ -98,9 +98,9 @@
                                                                                  Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
                                                     </materialDesign:PopupBox.ToggleContent>
                                                     <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}">
-                                                        <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=gbTask}" 
+                                                        <ListBoxItem Content="Edytuj" Tag="{Binding Path=Tag, ElementName=gbTask}" 
                                                                      cal:Message.Attach="[Event MouseUp] = [Action EditTask($source)]" />
-                                                        <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=gbTask}"
+                                                        <ListBoxItem Content="Usuń" Tag="{Binding Path=Tag, ElementName=gbTask}"
                                                                      cal:Message.Attach="[Event MouseUp] = [Action DeleteTaskAsync($source)]"/>
                                                     </ListBox>
                                                 </materialDesign:PopupBox>
@@ -123,8 +123,8 @@
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                         Width="120"
-                        ToolTip="Click to add new task!">
-                    Add new task
+                        ToolTip="Kliknij by dodać nowe zadanie!">
+                    Nowe zadanie
                 </Button>
 
             </Grid>

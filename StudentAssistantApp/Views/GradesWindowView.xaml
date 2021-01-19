@@ -28,23 +28,23 @@
                         </TextBox>
                         <TextBox x:Name="wageBox" Padding="0 2" Margin="0 30 0 0" Text="{Binding Wage}"
                               materialDesign:HintAssist.Hint="Wage"
-                              materialDesign:HintAssist.HelperText="Put value from interval 0 - 100"
+                              materialDesign:HintAssist.HelperText="Wpisz liczbę z zakresu 0 - 100"
                                  Foreground="#28324b" CaretBrush="#28324b"
                                  materialDesign:HintAssist.Foreground="#28324b"
                                  materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
                                  BorderBrush="#28324b">
                         </TextBox>
                         <ComboBox x:Name="typesBox" SelectedItem="{Binding Path=SelectedType, Mode=OneWayToSource}" 
-                                  materialDesign:HintAssist.Hint="Type"
-                                  materialDesign:HintAssist.HelperText="Select type"
+                                  materialDesign:HintAssist.Hint="Typ"
+                                  materialDesign:HintAssist.HelperText="Wybierz typ oceny"
                                   ItemsSource="{Binding TypesOfGrades}" Padding="0 2" Margin="0 30 0 0" Foreground="#28324b"  
                                   materialDesign:TextFieldAssist.UnderlineBrush="#28324b"
                                   BorderBrush="#28324b"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 40" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Button Content="Close" Margin="15 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
-                        <Button Content="Accept" Margin="15 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade(gradeBox.Text, wageBox.Text)]"/>
+                        <Button Content="Zamknij" Margin="15 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        <Button Content="Akceptuj" Margin="15 0" cal:Message.Attach="[Event Click] = [Action AddNewGrade(gradeBox.Text, wageBox.Text)]"/>
                     </StackPanel>
 
                 </Grid>
@@ -86,7 +86,8 @@
                                         </ItemsControl.ItemsPanel>
 
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate><!--Content="{Binding GradeValue}"-->
+                                            <DataTemplate>
+                                                <!--Content="{Binding GradeValue}"-->
                                                 <Button Width="50" Height="50" Tag="{Binding GradeId}" x:Name="btnGrade"
                                                     Margin="0 0 8 8" Padding="0" Background="#ffb525" Foreground="#28324b" FontSize="22">
                                                     <materialDesign:PopupBox
@@ -96,9 +97,9 @@
                                                                        Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
                                                         </materialDesign:PopupBox.ToggleContent>
                                                         <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" FontSize="15">
-                                                            <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=btnGrade}" 
+                                                            <ListBoxItem Content="Edytuj" Tag="{Binding Path=Tag, ElementName=btnGrade}" 
                                                                      cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source, txtSubject.Text)]" />
-                                                            <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=btnGrade}"
+                                                            <ListBoxItem Content="Usuń" Tag="{Binding Path=Tag, ElementName=btnGrade}"
                                                                      cal:Message.Attach="[Event MouseUp] = [Action DeleteGrade($source)]"/>
                                                         </ListBox>
                                                     </materialDesign:PopupBox>
@@ -119,7 +120,7 @@
                 <!--Start Add and Remove Subject section design-->
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0 0 30 30" HorizontalAlignment="Right">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 0">
-                        <Button x:Name="AddSubject" Content="Add subject" Width="150"
+                        <Button x:Name="AddSubject" Content="Dodaj przedmiot" Width="150"
                             Background="#ffb525" Foreground="#28324b"  Margin="0 0 0 10"
                             cal:Message.Attach="[Event Click] = [Action AddSubject]" />
 
@@ -128,7 +129,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="20 0 0 0">
-                        <Button x:Name="RemoveSubject" Content="Remove subject" Width="150" 
+                        <Button x:Name="RemoveSubject" Content="Usuń przedmiot" Width="150" 
                             Background="#ffb525" Foreground="#28324b" Margin="0 0 0 10"
                             cal:Message.Attach="[Event Click] = [Action RemoveSubject]"/>
 

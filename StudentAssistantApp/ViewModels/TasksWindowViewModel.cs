@@ -24,12 +24,14 @@ namespace StudentAssistantApp.ViewModels
         {
             get { return tasks; }
             set { tasks = value; }
-            
+
         }
         public string TaskName
         {
             get { return taskName; }
-            set { taskName = value;
+            set
+            {
+                taskName = value;
                 NotifyOfPropertyChange("TaskName");
             }
         }
@@ -37,7 +39,9 @@ namespace StudentAssistantApp.ViewModels
         public string TaskExplanation
         {
             get { return taskExplanation; }
-            set { taskExplanation = value;
+            set
+            {
+                taskExplanation = value;
                 NotifyOfPropertyChange("TaskExplanation");
             }
         }
@@ -45,7 +49,9 @@ namespace StudentAssistantApp.ViewModels
         public bool IsDialogOpen
         {
             get { return isDialogOpen; }
-            set { isDialogOpen = value;
+            set
+            {
+                isDialogOpen = value;
                 NotifyOfPropertyChange("IsDialogOpen");
             }
         }
@@ -55,12 +61,12 @@ namespace StudentAssistantApp.ViewModels
             //Tasks.Add(new TaskModel { TaskName = "Skończyć projekt", TaskExplanation="Skończyć zadanie domowe z programowania", TaskID = itemCount++}); //TODO Показывать название при наведении мышки
             //Tasks.Add(new TaskModel { TaskName = "Styudia", TaskExplanation="Zrobić zadanie z programowania!", TaskID = itemCount++ }); 
             //Tasks.Add(new TaskModel { TaskName = "Impreza", TaskExplanation="Napić się piwka!", TaskID = itemCount++});
-            
+
             //Czytanie z bazy i wyświetlenie
-           using(var context = new StudentAppContext())
+            using (var context = new StudentAppContext())
             {
                 var tasks = context.DBTasks.ToList();
-                foreach(DBTask t1 in tasks)
+                foreach (DBTask t1 in tasks)
                 {
                     Tasks.Add(new TaskModel { TaskName = t1.TaskHeadline, TaskExplanation = t1.TaskText, TaskID = t1.DBTaskId });
                 }

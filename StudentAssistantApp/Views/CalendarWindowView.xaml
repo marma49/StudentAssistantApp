@@ -307,7 +307,8 @@
                             <SineEase x:Key="EasingFunction" EasingMode="EaseOut"/>
                             <CubicEase x:Key="EasingFunctionIn" EasingMode="EaseIn"/>
 
-                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}"> <!--Day styles--> 
+                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                                <!--Day styles-->
                                 <TextBlock Foreground="{DynamicResource MaterialDesignToolTipBackground}" 
                                        Opacity="0.65"
                                        FontWeight="Bold"
@@ -644,7 +645,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="MaterialDesignCalendarPortraitCustom" TargetType="{x:Type Calendar}"> 
+        <Style x:Key="MaterialDesignCalendarPortraitCustom" TargetType="{x:Type Calendar}">
             <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}"/>
             <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
             <Setter Property="CalendarDayButtonStyle" Value="{StaticResource MaterialDesignCalendarDayButton}"/>
@@ -1052,7 +1053,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Border Background="#596b99" Height="120"  CornerRadius="2 2 0 0"> 
+                                <Border Background="#596b99" Height="120"  CornerRadius="2 2 0 0">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 6 38 0"
                                             x:Name="TimeReadoutStackPanel">
                                         <StackPanel.Resources>
@@ -1231,9 +1232,9 @@
                         <TextBlock Text="{Binding EventExplanation}" TextWrapping="Wrap" Margin="20 20" Foreground="#fff"/>
                     </ScrollViewer>
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-                        <Button Content="Close" Width="90" Margin="15 20" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        <Button Content="Zamknij" Width="90" Margin="15 20" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action HideFullEvent]"/>
-                        <Button Content="Delete" Width="90" Margin="15 20" cal:Message.Attach="[Event Click] = [Action DeleteEvent]" 
+                        <Button Content="Usuń" Width="90" Margin="15 20" cal:Message.Attach="[Event Click] = [Action DeleteEvent]" 
                                 Background="#e41e1e" BorderBrush="#e41e1e"/>
                     </StackPanel>
                 </Grid>
@@ -1297,7 +1298,7 @@
                     <Label Content="Dodaj nowe wydarzenie!" Margin= "0 30 0 0" FontSize="15" Foreground="White" HorizontalAlignment="Center"/>
                     <StackPanel Margin="50 80">
                         <TextBox x:Name="EventName" Padding="0 2" Text="{Binding EventName}"
-                                 materialDesign:HintAssist.Hint="Event name"
+                                 materialDesign:HintAssist.Hint="Nazwa wydarzenia"
                                  Foreground="White" CaretBrush="White"
                                  materialDesign:HintAssist.Foreground="White"
                                  materialDesign:TextFieldAssist.UnderlineBrush="White"
@@ -1306,7 +1307,7 @@
                                  TextWrapping="Wrap"
                                  Height="80"
                                  Margin="0 40 0 0"
-                                 materialDesign:HintAssist.Hint="This is a text area" 
+                                 materialDesign:HintAssist.Hint="To jest pole tekstowe" 
                                  Foreground="White" CaretBrush="White"
                                  materialDesign:HintAssist.Foreground="White"
                                  materialDesign:TextFieldAssist.UnderlineBrush="White"
@@ -1328,9 +1329,9 @@
                         </materialDesign:TimePicker>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 25" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <Button Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        <Button Content="Zamknij" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action CloseNewEvenDialog]"/>
-                        <Button Content="Accept" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
+                        <Button Content="Akceptuj" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"
                                 cal:Message.Attach="[Event Click] = [Action AddEvent]"/>
                     </StackPanel>
                 </Grid>

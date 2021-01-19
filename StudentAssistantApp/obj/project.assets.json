@@ -7599,19 +7599,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Micha\\.nuget\\packages\\": {}
+    "C:\\Users\\Jan Kowalski\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Micha\\Desktop\\Documenty\\zdalne_elo\\Programowanie zwinne\\StudentAssistantApp\\18.01\\Git\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+      "projectUniqueName": "C:\\Users\\Jan Kowalski\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
       "projectName": "StudentAssistantApp",
-      "projectPath": "D:\\Users\\Micha\\Desktop\\Documenty\\zdalne_elo\\Programowanie zwinne\\StudentAssistantApp\\18.01\\Git\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
-      "packagesPath": "C:\\Users\\Micha\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\Micha\\Desktop\\Documenty\\zdalne_elo\\Programowanie zwinne\\StudentAssistantApp\\18.01\\Git\\StudentAssistantApp\\StudentAssistantApp\\obj\\",
+      "projectPath": "C:\\Users\\Jan Kowalski\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\StudentAssistantApp.csproj",
+      "packagesPath": "C:\\Users\\Jan Kowalski\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jan Kowalski\\Source\\Repos\\StudentAssistantApp\\StudentAssistantApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jan Kowalski\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

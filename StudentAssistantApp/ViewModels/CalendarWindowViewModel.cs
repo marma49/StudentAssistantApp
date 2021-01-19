@@ -20,7 +20,7 @@ namespace StudentAssistantApp.ViewModels
         private bool isNewEventDialogOpen = false;
         private string eventName;
         private string eventExplanation;
-        EventModel eventModel; 
+        EventModel eventModel;
         private int eventOrderNum = 0, eventIndex = 0;
 
 
@@ -81,13 +81,13 @@ namespace StudentAssistantApp.ViewModels
         public CalendarWindowViewModel()
         {
             //Pobranie i wyswietlenie danych z bazy danych
-            using(var context = new StudentAppContext())
+            using (var context = new StudentAppContext())
             {
                 var events = context.DBEvents.ToList();
-                foreach(DBEvent e1 in events)
+                foreach (DBEvent e1 in events)
                 {
-                    Events.Add(new EventModel 
-                    { 
+                    Events.Add(new EventModel
+                    {
                         EventName = e1.EventTitle,
                         EventExplanation = e1.EventContent,
                         EventDate = e1.DateEvent.ToString("MM/dd/yyyy hh:mm tt"),
@@ -105,12 +105,12 @@ namespace StudentAssistantApp.ViewModels
                                     SelectedTime.Hour,
                                     SelectedTime.Minute,
                                     SelectedTime.Second);
-         
+
 
             //Dodanie do bazy danych
             int orderId;
             var dbevent = new DBEvent { EventTitle = eventName, EventContent = eventExplanation, DateEvent = fullDate };
-            using(StudentAppContext context = new StudentAppContext())
+            using (StudentAppContext context = new StudentAppContext())
             {
                 context.DBEvents.Add(dbevent);
                 context.SaveChanges();
@@ -154,7 +154,7 @@ namespace StudentAssistantApp.ViewModels
         {
             IsDialogOpen = false;
             await Task.Delay(200);
-          
+
             Events.Remove(eventModel);
 
             //Usunięcie zdarzenia z bazy danych
