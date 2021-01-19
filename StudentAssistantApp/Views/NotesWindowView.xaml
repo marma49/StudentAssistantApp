@@ -82,8 +82,8 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="0 15">
                     <Button HorizontalAlignment="Right" Content="Delete" Margin="15 0"
                         Foreground="White" Background="#e41e1e" BorderBrush="#e41e1e"
-                        cal:Message.Attach="[Event Click] = [Action DeleteNote]" IsEnabled="{Binding IsEditing}"
-                        Width="120"/>
+                        cal:Message.Attach="[Event Click] = [Action DeleteNote($source)]" IsEnabled="{Binding IsEditing}"
+                        Width="120" Cursor="Hand"/>
                 </StackPanel>
 
             </Grid>

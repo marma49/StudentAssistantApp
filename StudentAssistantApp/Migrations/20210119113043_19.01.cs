@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentAssistantApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class _1901 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,7 +90,6 @@ namespace StudentAssistantApp.Migrations
                     Mark = table.Column<int>(type: "int", nullable: false),
                     Semester = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
                     DBSubjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentAssistantApp.Models;
 
 namespace StudentAssistantApp.Migrations
 {
     [DbContext(typeof(StudentAppContext))]
-    partial class StudentAppContextModelSnapshot : ModelSnapshot
+    [Migration("20210119113043_19.01")]
+    partial class _1901
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,8 @@ namespace StudentAssistantApp.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Mark")
-                        .HasColumnType("float");
+                    b.Property<int>("Mark")
+                        .HasColumnType("int");
 
                     b.Property<int>("Semester")
                         .HasColumnType("int");

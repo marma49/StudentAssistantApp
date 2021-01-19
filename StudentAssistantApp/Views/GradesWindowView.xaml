@@ -87,7 +87,7 @@
 
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate><!--Content="{Binding GradeValue}"-->
-                                                <Button Width="50" Height="50" 
+                                                <Button Width="50" Height="50" Tag="{Binding GradeId}" x:Name="btnGrade"
                                                     Margin="0 0 8 8" Padding="0" Background="#ffb525" Foreground="#28324b" FontSize="22">
                                                     <materialDesign:PopupBox
                                                     PlacementMode="BottomAndAlignLeftEdges" Foreground="Black">
@@ -96,9 +96,9 @@
                                                                        Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=materialDesign:PopupBox}, Path=Foreground}"/>
                                                         </materialDesign:PopupBox.ToggleContent>
                                                         <ListBox cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=GridLayout}" FontSize="15">
-                                                            <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=gbTask}" 
-                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source)]" />
-                                                            <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=gbTask}"
+                                                            <ListBoxItem Content="Edytować" Tag="{Binding Path=Tag, ElementName=btnGrade}" 
+                                                                     cal:Message.Attach="[Event MouseUp] = [Action EditGrade($source, txtSubject.Text)]" />
+                                                            <ListBoxItem Content="Usunąć" Tag="{Binding Path=Tag, ElementName=btnGrade}"
                                                                      cal:Message.Attach="[Event MouseUp] = [Action DeleteGrade($source)]"/>
                                                         </ListBox>
                                                     </materialDesign:PopupBox>

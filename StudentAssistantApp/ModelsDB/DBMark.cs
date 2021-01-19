@@ -11,11 +11,11 @@ namespace StudentAssistantApp.Models
     {
         public int DBMarkId { get; set; }
         public string Subject { get; set; }
-        public int Mark { get; set; }
+        public double Mark { get; set; }
         public int Semester { get; set; }
         public DateTime Date { get; set; }
         //[ForeignKey("Subjects")]
-        public int SubjectId { get; set; }
+        //public int SubjectId { get; set; }
         public virtual DBSubject DBSubject { get; set; }
     }
 }
