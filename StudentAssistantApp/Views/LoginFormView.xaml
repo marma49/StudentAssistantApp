@@ -23,7 +23,7 @@
                         <StackPanel Margin="40">
                             <Label Foreground="White" Content="Nowe konto" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
                             <StackPanel Margin="20 30">
-                                <TextBox materialDesign:HintAssist.Hint="Login" Foreground="White" CaretBrush="White"
+                                <TextBox x:Name="NewUser" materialDesign:HintAssist.Hint="Nazwa użytkownika" Foreground="White" CaretBrush="White"
                              materialDesign:HintAssist.Foreground="White"
                              materialDesign:TextFieldAssist.UnderlineBrush="White"
                              BorderBrush="#fff"
@@ -33,12 +33,14 @@
                                  materialDesign:HintAssist.Foreground="White"
                                  materialDesign:TextFieldAssist.UnderlineBrush="White"
                                  BorderBrush="#fff"
+                                             PasswordChanged="NewPassword1_PasswordChanged"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                  Margin="0 20"/>
                                 <PasswordBox materialDesign:HintAssist.Hint="Potwierdź hasło" Foreground="White" CaretBrush="White"
                                  materialDesign:HintAssist.Foreground="White"
                                  materialDesign:TextFieldAssist.UnderlineBrush="White"
                                  BorderBrush="#fff"
+                                 PasswordChanged="NewPassword2_PasswordChanged"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                  Margin="0 20"/>
                             </StackPanel>
