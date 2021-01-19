@@ -23,7 +23,7 @@
                         <StackPanel Margin="40">
                             <Label Foreground="White" Content="Nowe konto" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
                             <StackPanel Margin="20 30">
-                                <TextBox x:Name="NewUser" materialDesign:HintAssist.Hint="Nazwa użytkownika" Foreground="White" CaretBrush="White"
+                                <TextBox x:Name="NewUser" Text="{Binding NewUser}" materialDesign:HintAssist.Hint="Nazwa użytkownika" Foreground="White" CaretBrush="White"
                              materialDesign:HintAssist.Foreground="White"
                              materialDesign:TextFieldAssist.UnderlineBrush="White"
                              BorderBrush="#fff"
@@ -65,7 +65,7 @@
                              BorderBrush="#fff"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="0 20"/>
-                        <PasswordBox x:Name="UserPassword" materialDesign:HintAssist.Hint="Password" Foreground="White" CaretBrush="White"
+                        <PasswordBox x:Name="UserPassword" materialDesign:HintAssist.Hint="Hasło" Foreground="White" CaretBrush="White"
                                      PasswordChanged="Password_PasswordChanged"
                                  materialDesign:HintAssist.Foreground="White"
                                  materialDesign:TextFieldAssist.UnderlineBrush="White"
@@ -75,8 +75,8 @@
                     </StackPanel>
                     <StackPanel Margin="0 40 0 0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="Close" Content="Close" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
-                            <Button x:Name="LogIn" Content="Log In" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
+                            <Button x:Name="Close" Content="Zamknij" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
+                            <Button x:Name="LogIn" Content="Zaloguj" Margin="15 0" Foreground="Black" Background="#ffb525" BorderBrush="#ffb525"/>
                         </StackPanel>
                         <Button x:Name="NewAccount" Content="Nowe konto" Margin="50 20" Foreground="Black" Background="#ffb525"  BorderBrush="#ffb525"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
