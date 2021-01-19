@@ -23,7 +23,7 @@
                         <StackPanel Margin="40">
                             <Label Foreground="White" Content="Nowe konto" FontSize="22" HorizontalAlignment="Center" Margin="0 40 0 0"/>
                             <StackPanel Margin="20 30">
-                                <TextBox x:Name="NewUser" materialDesign:HintAssist.Hint="Nazwa użytkownika" Foreground="White" CaretBrush="White"
+                                <TextBox x:Name="NewUser" Text="{Binding NewUser}" materialDesign:HintAssist.Hint="Nazwa użytkownika" Foreground="White" CaretBrush="White"
                              materialDesign:HintAssist.Foreground="White"
                              materialDesign:TextFieldAssist.UnderlineBrush="White"
                              BorderBrush="#fff"
