@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -20,6 +20,14 @@ namespace StudentAssistantApp.Views
         public LoginFormView()
         {
             InitializeComponent();
+        }
+        //teoretycznie złamanie zasad MVVM, ale jest konieczne by działało logowanie
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword;
+            }
         }
     }
 }
